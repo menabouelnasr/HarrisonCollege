@@ -1,0 +1,68 @@
+Create table Instructor(
+	id Number primary key,
+	name VARCHAR(20),
+	deptID Integer,
+	officeNum VARCHAR(5)
+  );
+
+Create table Student(
+	id Number primary key,
+	name VARCHAR(32),
+	major VARCHAR(32),
+	entryYear VARCHAR(10),
+	gradYear VARCHAR(10)
+	);
+  
+Create table Department(
+	id Number primary key,
+	name VARCHAR(32),
+	major VARCHAR(32)
+  );
+	
+Create table Course(
+	id Number primary key,
+	enabled	Number(1),
+	deptID Integer,
+	subjectCode	VARCHAR(32),
+	courseNum VARCHAR(4),
+	section VARCHAR(4),
+	timeID Integer,
+	instructorID Integer,
+	roomID Integer,
+	name VARCHAR(32),
+	description VARCHAR(1000),
+	credits	VARCHAR(2),
+	semester VARCHAR(32)
+	);
+  
+Create table Time(
+  id Number primary key, 
+	courseID Integer,
+	day VARCHAR(10),
+	time VARCHAR(10),
+	duration Varchar(10)
+  );
+	
+Create table Classroom(
+	id Integer primary key,
+	bldgName	VARCHAR(32),
+	roomNum	VARCHAR(10),
+	maxCap VARCHAR(10)
+ );
+ 
+Create table Enroll(
+	id Integer primary key,
+	studID integer,
+	courseID integer,
+	grade	VARCHAR(4)
+  );
+	
+Create table Usr(
+	id Integer primary key,
+	username Varchar(32),
+	password Varchar(32),
+	email Varchar(32),
+	type Varchar(32),
+	typeID Integer,
+	money Varchar(32)
+  );
