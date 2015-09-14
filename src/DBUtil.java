@@ -4,7 +4,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 public class DBUtil {
-	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("Sept01a Super Shopping Cart");
+	private static final EntityManagerFactory emf = Persistence.createEntityManagerFactory("HarrisonCollege");
 	
 	public static EntityManagerFactory getEmFactory() {
 		return emf;

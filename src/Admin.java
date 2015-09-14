@@ -22,13 +22,18 @@ public class Admin extends HttpServlet {
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		//Util.processUser(request, false);
-		//request.setAttribute("orders", showOrders(request));
+		request.setAttribute("courses", listCourses(request));
+		request.setAttribute("rooms",   listRooms(request));
+		request.setAttribute("depts",   listDepts(request));
+		request.setAttribute("majors",  listMajors(request));
 		getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
 	}
 	
 	private String listCourses(HttpServletRequest request) {
 		String html = "";
-		for (Object o : DBUtil.get("SELECT i FROM Item i")) {
+		System.out.println("WHAT THE FUCK");
+		for (Object o : DBUtil.get("SELECT c FROM Course c")) {
+			System.out.println("WHAT THE FUCK222");
 			Course c = (Course)o;
 			html += "<tr><td>" + c.getId() + "</td>";
 			html += "<td>" + c.getEnabled() + "</td>";
@@ -49,33 +54,34 @@ public class Admin extends HttpServlet {
 	
 	private String listRooms(HttpServletRequest request) {
 		String html = "";
-		for (Object o : DBUtil.get("SELECT i FROM Item i")) {
-			Course c = (Course)o;
-			html += "<tr><td>" + i.getId() + "</td>";
-			html += "<td>" + i.getPrice() + "</td>";
-			html += "<td>" + availability + "</td></tr>";
+		for (Object o : DBUtil.get("SELECT c FROM Classroom c")) {
+			Classroom c = (Classroom)o;
+			html += "<tr><td>" + c.getId() + "</td>";
+			html += "<td>" + c.getBldgname() + "</td>";
+			html += "<td>" + c.getRoomnum() + "</td>";
+			html += "<td>" + c.getMaxcap() + "</td></tr>";
 		}		
 		return html;
 	}
 	
 	private String listDepts(HttpServletRequest request) {
 		String html = "";
-		for (Object o : DBUtil.get("SELECT i FROM Item i")) {
-			Course c = (Course)o;
-			html += "<tr><td>" + i.getId() + "</td>";
-			html += "<td>" + i.getPrice() + "</td>";
-			html += "<td>" + availability + "</td></tr>";
+		for (Object o : DBUtil.get("SELECT d FROM Department d")) {
+			Department d = (Department)o;
+			html += "<tr><td>" + d.getId() + "</td>";
+			html += "<td>" + d.getName() + "</td>";
+			html += "<td>" + d.getMajor() + "</td></tr>";
 		}		
 		return html;
 	}
 
 	private String listMajors(HttpServletRequest request) {
 		String html = "";
-		for (Object o : DBUtil.get("SELECT i FROM Item i")) {
-			Course c = (Course)o;
-			html += "<tr><td>" + i.getId() + "</td>";
-			html += "<td>" + i.getPrice() + "</td>";
-			html += "<td>" + availability + "</td></tr>";
+		for (Object o : DBUtil.get("SELECT d FROM Department d")) {
+			Department d = (Department)o;
+			html += "<tr><td>" + d.getId() + "</td>";
+			html += "<td>" + d.getName() + "</td>";
+			html += "<td>" + d.getMajor() + "</td></tr>";
 		}		
 		return html;
 	}

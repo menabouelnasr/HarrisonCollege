@@ -32,7 +32,6 @@ public class Course implements Serializable {
 
 	private long roomid;
 
-	@Column(name="\"SECTION\"")
 	private String section;
 
 	private String semester;
