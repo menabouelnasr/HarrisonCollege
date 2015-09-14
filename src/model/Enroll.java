@@ -1,5 +1,6 @@
 package model;
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 /**
@@ -7,6 +8,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name="ENROLL", schema="TESTDB")
 @NamedQuery(name="Enroll.findAll", query="SELECT e FROM Enroll e")
 public class Enroll implements Serializable {
 	private static final long serialVersionUID = 1L;

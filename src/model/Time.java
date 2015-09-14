@@ -8,7 +8,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="\"TIME\"")
+@Table(name="TIME", schema="TESTDB")
 @NamedQuery(name="Time.findAll", query="SELECT t FROM Time t")
 public class Time implements Serializable {
 	private static final long serialVersionUID = 1L;

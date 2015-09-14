@@ -1,3 +1,4 @@
+package source;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,10 @@ public class Admin extends HttpServlet {
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		//Util.processUser(request, false);
+		removeCourse(request.getParameter("deleteCourseID"));
+		removeRoom(request.getParameter("deleteRoomID"));
+		removeDept(request.getParameter("deleteDeptID"));
+		
 		request.setAttribute("courses", listCourses(request));
 		request.setAttribute("rooms",   listRooms(request));
 		request.setAttribute("depts",   listDepts(request));
@@ -31,9 +36,7 @@ public class Admin extends HttpServlet {
 	
 	private String listCourses(HttpServletRequest request) {
 		String html = "";
-		System.out.println("WHAT THE FUCK");
 		for (Object o : DBUtil.get("SELECT c FROM Course c")) {
-			System.out.println("WHAT THE FUCK222");
 			Course c = (Course)o;
 			html += "<tr><td>" + c.getId() + "</td>";
 			html += "<td>" + c.getEnabled() + "</td>";
@@ -47,7 +50,9 @@ public class Admin extends HttpServlet {
 			html += "<td>" + c.getName() + "</td>";
 			html += "<td>" + c.getDescription()+ "</td>";
 			html += "<td>" + c.getCredits() + "</td>";
-			html += "<td>" + c.getSemester() + "</td></tr>";
+			html += "<td>" + c.getSemester() + "</td>";
+			html += "<td><a href=\"EditCourse?id=" + c.getId() + "\">Edit</a></td>";
+			html += "<td><a href=\"Admin?deleteCourseID=" + c.getId() + "\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a></td><tr/>";
 		}		
 		return html;
 	}
@@ -59,7 +64,9 @@ public class Admin extends HttpServlet {
 			html += "<tr><td>" + c.getId() + "</td>";
 			html += "<td>" + c.getBldgname() + "</td>";
 			html += "<td>" + c.getRoomnum() + "</td>";
-			html += "<td>" + c.getMaxcap() + "</td></tr>";
+			html += "<td>" + c.getMaxcap() + "</td>";
+			html += "<td><a href=\"EditRoom?id=" + c.getId() + "\">Edit</a></td>";
+			html += "<td><a href=\"Admin?deleteRoomID=" + c.getId() + "\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a></td><tr/>";
 		}		
 		return html;
 	}
@@ -70,7 +77,9 @@ public class Admin extends HttpServlet {
 			Department d = (Department)o;
 			html += "<tr><td>" + d.getId() + "</td>";
 			html += "<td>" + d.getName() + "</td>";
-			html += "<td>" + d.getMajor() + "</td></tr>";
+			html += "<td>" + d.getMajor() + "</td>";
+			html += "<td><a href=\"EditDept?id=" + d.getId() + "\">Edit</a></td>";
+			html += "<td><a href=\"Admin?deleteDeptID=" + d.getId() + "\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a></td><tr/>";
 		}		
 		return html;
 	}
@@ -81,9 +90,24 @@ public class Admin extends HttpServlet {
 			Department d = (Department)o;
 			html += "<tr><td>" + d.getId() + "</td>";
 			html += "<td>" + d.getName() + "</td>";
-			html += "<td>" + d.getMajor() + "</td></tr>";
+			html += "<td>" + d.getMajor() + "</td>";
+			html += "<td><a href=\"EditMajor?id=" + d.getId() + "\">Edit</a></td>";
+			html += "<td><a href=\"Admin?deleteDeptID=" + d.getId() + "\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a></td><tr/>";
 		}		
 		return html;
+	}
+	
+	private void removeCourse(String courseID) {
+		for (Object o : DBUtil.get("SELECT c FROM Course c WHERE c.id = " + courseID))
+			DBUtil.delete(o);
+	}
+	private void removeRoom(String roomID) {
+		for (Object o : DBUtil.get("SELECT c FROM Classroom c WHERE c.id = " + roomID))
+			DBUtil.delete(o);
+	}
+	private void removeDept(String deptID) {
+		for (Object o : DBUtil.get("SELECT d FROM Department d WHERE d.id = " + deptID))
+			DBUtil.delete(o);
 	}
 	
 	/*
@@ -94,7 +118,7 @@ Create, update, list or disable a major
 Add class to schedule for current or later semester
 Remove class from schedule for current or later semester
 Change a new users type to (student, instructor, advisor or administrator)
-Override maximum enrollment hold
+Override maximum enrollment hold // gonna need to make new room wtf
 view all course
 view all classes by an instructor
 view all classes by a student
