@@ -3,7 +3,10 @@ Create table Instructor(
 	name VARCHAR(20),
 	deptID Integer,
 	officeNum VARCHAR(5)
-  );
+);
+INSERT INTO Instructor (id, name, deptID, officeNum)
+VALUES (1, 'Ms. Krabapple', 1, '1014');
+SELECT * FROM Instructor;
 
 Create table Student(
 	id Number primary key,
@@ -11,14 +14,20 @@ Create table Student(
 	major VARCHAR(32),
 	entryYear VARCHAR(10),
 	gradYear VARCHAR(10)
-	);
+);
+INSERT INTO Student (id, name, major, entryYear, gradYear)
+VALUES (1, 'Bob', 'English', '2015', null);
+SELECT * FROM Student;  
   
 Create table Department(
 	id Number primary key,
 	name VARCHAR(32),
 	major VARCHAR(32)
-  );
-	
+);
+INSERT INTO Department (id, name, major)
+VALUES (1, 'Language', 'English');
+SELECT * FROM Department;	
+  
 Create table Course(
 	id Number primary key,
 	enabled	Number(1),
@@ -33,7 +42,10 @@ Create table Course(
 	description VARCHAR(1000),
 	credits	VARCHAR(2),
 	semester VARCHAR(32)
-	);
+);
+INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
+VALUES (1, 1, 1, 'ENGL', '101', '0101', 1, 1, 1, 'Basic English', 'Learn to read LOL', '4', 'Fall 2015');
+SELECT * FROM Course;
   
 Create table Time(
   id Number primary key, 
@@ -41,22 +53,31 @@ Create table Time(
 	day VARCHAR(10),
 	time VARCHAR(10),
 	duration Varchar(10)
-  );
+);
+INSERT INTO Time (id, courseID, day, time, duration)
+VALUES (1, null, 'MWF', '1p - 2p', null);
+SELECT * FROM Time;
 	
-Create table Classroom(
+Create table Classroom (
 	id Integer primary key,
 	bldgName	VARCHAR(32),
 	roomNum	VARCHAR(10),
 	maxCap VARCHAR(10)
- );
+);
+INSERT INTO Classroom (id, bldgName, roomNum, maxCap)
+VALUES (1, 'H J Patterson', '2018', '40');
+SELECT * FROM Classroom;
  
 Create table Enroll(
 	id Integer primary key,
 	studID integer,
 	courseID integer,
 	grade	VARCHAR(4)
-  );
-	
+);
+INSERT INTO Enroll (id, studID, courseID, grade)
+VALUES (1, 1, 1, 'U');
+SELECT * FROM Enroll;	
+  
 Create table Usr(
 	id Integer primary key,
 	username Varchar(32),
@@ -65,4 +86,18 @@ Create table Usr(
 	type Varchar(32),
 	typeID Integer,
 	money Varchar(32)
-  );
+);
+INSERT INTO Usr (id, username, password, email, type, typeID, money)
+VALUES (1, 'Bob', 'password', 'Bob@bob.com', 'Student', 1, '0');
+SELECT * FROM Usr;
+
+CREATE SEQUENCE CLASSROOM_ID_GENERATOR;
+CREATE SEQUENCE COURSE_ID_GENERATOR;
+CREATE SEQUENCE DEPARTMENT_ID_GENERATOR;
+CREATE SEQUENCE ENROLL_ID_GENERATOR;
+CREATE SEQUENCE INSTRUCTOR_ID_GENERATOR;
+CREATE SEQUENCE STUDENT_ID_GENERATOR;
+CREATE SEQUENCE TIME_ID_GENERATOR;
+CREATE SEQUENCE USRS_ID_GENERATOR;
+
+

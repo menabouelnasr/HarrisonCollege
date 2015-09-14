@@ -1,11 +1,11 @@
-
-
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import model.*;
 
 @WebServlet("/Admin")
 public class Admin extends HttpServlet {
@@ -25,7 +25,60 @@ public class Admin extends HttpServlet {
 		//request.setAttribute("orders", showOrders(request));
 		getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
 	}
+	
+	private String listCourses(HttpServletRequest request) {
+		String html = "";
+		for (Object o : DBUtil.get("SELECT i FROM Item i")) {
+			Course c = (Course)o;
+			html += "<tr><td>" + c.getId() + "</td>";
+			html += "<td>" + c.getEnabled() + "</td>";
+			html += "<td>" + c.getDeptid() + "</td>";
+			html += "<td>" + c.getSubjectcode() + "</td>";
+			html += "<td>" + c.getCoursenum() + "</td>";
+			html += "<td>" + c.getSection() + "</td>";
+			html += "<td>" + c.getTimeid() + "</td>";
+			html += "<td>" + c.getInstructorid() + "</td>";
+			html += "<td>" + c.getRoomid() + "</td>";
+			html += "<td>" + c.getName() + "</td>";
+			html += "<td>" + c.getDescription()+ "</td>";
+			html += "<td>" + c.getCredits() + "</td>";
+			html += "<td>" + c.getSemester() + "</td></tr>";
+		}		
+		return html;
+	}
+	
+	private String listRooms(HttpServletRequest request) {
+		String html = "";
+		for (Object o : DBUtil.get("SELECT i FROM Item i")) {
+			Course c = (Course)o;
+			html += "<tr><td>" + i.getId() + "</td>";
+			html += "<td>" + i.getPrice() + "</td>";
+			html += "<td>" + availability + "</td></tr>";
+		}		
+		return html;
+	}
+	
+	private String listDepts(HttpServletRequest request) {
+		String html = "";
+		for (Object o : DBUtil.get("SELECT i FROM Item i")) {
+			Course c = (Course)o;
+			html += "<tr><td>" + i.getId() + "</td>";
+			html += "<td>" + i.getPrice() + "</td>";
+			html += "<td>" + availability + "</td></tr>";
+		}		
+		return html;
+	}
 
+	private String listMajors(HttpServletRequest request) {
+		String html = "";
+		for (Object o : DBUtil.get("SELECT i FROM Item i")) {
+			Course c = (Course)o;
+			html += "<tr><td>" + i.getId() + "</td>";
+			html += "<td>" + i.getPrice() + "</td>";
+			html += "<td>" + availability + "</td></tr>";
+		}		
+		return html;
+	}
 	
 	/*
 Create, update, list or disable a course
