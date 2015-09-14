@@ -24,8 +24,32 @@ Create table Department(
 	name VARCHAR(32),
 	major VARCHAR(32)
 );
-INSERT INTO Department (id, name, major)
-VALUES (1, 'Language', 'English');
+INSERT INTO Department (id, name, major) VALUES (1,  'Language', 'English');
+INSERT INTO Department (id, name, major) VALUES (2,  'Language', 'Spanish');
+INSERT INTO Department (id, name, major) VALUES (3,  'Language', 'French');
+INSERT INTO Department (id, name, major) VALUES (4,  'Language', 'Chinese');
+INSERT INTO Department (id, name, major) VALUES (5,  'Language', 'Korean');
+INSERT INTO Department (id, name, major) VALUES (6,  'Language', 'German');
+INSERT INTO Department (id, name, major) VALUES (7,  'Physical Sciences', 'Pre-Med');
+INSERT INTO Department (id, name, major) VALUES (8,  'Physical Sciences', 'Biology');
+INSERT INTO Department (id, name, major) VALUES (9,  'Physical Sciences', 'Chemistry');
+INSERT INTO Department (id, name, major) VALUES (10, 'Physical Sciences', 'Physics');
+INSERT INTO Department (id, name, major) VALUES (11, 'Social Sciences', 'Sociology');
+INSERT INTO Department (id, name, major) VALUES (12, 'Social Sciences', 'Psychology');
+INSERT INTO Department (id, name, major) VALUES (13, 'Engineering', 'Mechanical Engineering');
+INSERT INTO Department (id, name, major) VALUES (14, 'Engineering', 'Electrical Engineering');
+INSERT INTO Department (id, name, major) VALUES (15, 'Engineering', 'Petroleum Engineering');
+INSERT INTO Department (id, name, major) VALUES (16, 'Engineering', 'Chemical Engineering');
+INSERT INTO Department (id, name, major) VALUES (17, 'Technology', 'Computer Engineering');
+INSERT INTO Department (id, name, major) VALUES (18, 'Technology', 'Computer Science');
+INSERT INTO Department (id, name, major) VALUES (19, 'Technology', 'Information Technology');
+INSERT INTO Department (id, name, major) VALUES (20, 'Humanities', 'Law');
+INSERT INTO Department (id, name, major) VALUES (21, 'Humanities', 'Philosophy');
+INSERT INTO Department (id, name, major) VALUES (22, 'Humanities', 'History');
+INSERT INTO Department (id, name, major) VALUES (23, 'Humanities', 'Political Science');
+INSERT INTO Department (id, name, major) VALUES (24, 'Humanities', 'Business');
+INSERT INTO Department (id, name, major) VALUES (25, 'Arts', 'Music');
+INSERT INTO Department (id, name, major) VALUES (26, 'Arts', 'Theatre');
 SELECT * FROM Department;	
   
 Create table Course(
@@ -46,7 +70,7 @@ Create table Course(
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
 VALUES (1, 1, 1, 'ENGL', '101', '0101', 1, 1, 1, 'Basic English', 'Learn to read LOL', '4', 'Fall 2015');
 SELECT * FROM Course;
-  
+
 Create table Time(
   id Number primary key, 
 	courseID Integer,
