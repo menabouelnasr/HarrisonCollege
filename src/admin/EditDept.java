@@ -14,22 +14,20 @@ public class EditDept extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String deptID = request.getParameter("id");
-		request.setAttribute("deptID", deptID);
-		java.util.List<Object> list = DBUtil.get("SELECT d FROM Department d WHERE d.id = " + deptID);		
-		request.setAttribute("list", list);
+		String deptName = request.getParameter("name");
+		request.setAttribute("oldName", deptName);
+		//java.util.List<Object> list = DBUtil.get("SELECT d FROM Department d WHERE d.id = " + deptID);		
+		//request.setAttribute("list", list);
 		getServletContext().getRequestDispatcher("/admin/editDept.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String deptID = request.getParameter("deptID");
-		String major  = request.getParameter("major");
-		String name   = request.getParameter("name");
+		String oldName = request.getParameter("oldName");
+		String newName = request.getParameter("newName");
 		
-		for (Object o : DBUtil.get("SELECT d FROM Department d WHERE d.id = " + deptID)) {
+		for (Object o : DBUtil.get("SELECT d FROM Department d WHERE d.name = '" + oldName + "'")) {
 			Department d = (Department)o;
-			d.setMajor(major);
-			d.setName(name);
+			d.setName(newName);
 			DBUtil.update(d);
 		}
 		

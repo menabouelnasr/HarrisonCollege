@@ -82,24 +82,24 @@ INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID
 VALUES (6, 1, 1, 'ENGL', '393', '0301', 1, 1, 1, 'Technical Writing', 'Write Professionally.', '3', 'Fall 2015');
 
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (7, 1, 1, 'SPAN', '101', '0101', 1, 1, 1, 'Technical Writing', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (7, 1, 1, 'SPAN', '101', '0101', 1, 1, 1, 'Introductory Spanish', 'Learn Spanish.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (8, 1, 1, 'FREN', '101', '0101', 1, 1, 1, 'Technical Writing', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (8, 1, 1, 'FREN', '101', '0101', 1, 1, 1, 'Introductory French', 'Learn French.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (9, 1, 1, 'CHIN', '101', '0101', 1, 1, 1, 'Technical Writing', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (9, 1, 1, 'CHIN', '101', '0101', 1, 1, 1, 'Introductory Chinese', 'Learn Chinese.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (10, 1, 1, 'KORE', '101', '0101', 1, 1, 1, 'Technical Writing', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (10, 1, 1, 'KORE', '101', '0101', 1, 1, 1, 'Introductory Korean', 'Learn Korean.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (11, 1, 1, 'GERM', '101', '0101', 1, 1, 1, 'Technical Writing', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (11, 1, 1, 'GERM', '101', '0101', 1, 1, 1, 'Introductory German', 'Learn German.', '3', 'Fall 2015');
 
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (12, 1, 1, 'PMED', '101', '0101', 1, 1, 1, 'Technical Writing', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (12, 1, 1, 'PMED', '101', '0101', 1, 1, 1, 'Introductory Pre-Medicine', 'Learn Pre-Med.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (13, 1, 1, 'BIOL', '101', '0101', 1, 1, 1, 'Technical Writing', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (13, 1, 1, 'BIOL', '101', '0101', 1, 1, 1, 'Introductory Biology', 'Learn Biology.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (14, 1, 1, 'CHEM', '101', '0101', 1, 1, 1, 'Technical Writing', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (14, 1, 1, 'CHEM', '101', '0101', 1, 1, 1, 'Introductory Chemistry', 'Learn Chemistry.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (15, 1, 1, 'PHYS', '101', '0101', 1, 1, 1, 'Technical Writing', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (15, 1, 1, 'PHYS', '101', '0101', 1, 1, 1, 'Introductory Physics', 'Learn Physics.', '3', 'Fall 2015');
 
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
 VALUES (16, 1, 1, 'SOCI', '101', '0101', 1, 1, 1, 'Technical Writing', 'Write Professionally.', '3', 'Fall 2015');

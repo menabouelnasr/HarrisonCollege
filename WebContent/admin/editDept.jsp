@@ -25,13 +25,8 @@
 
 	<h3>Edit Department</h3><br/>
 	<form method="post" action="EditDept">
-	<input type="hidden" name="courseID" value="${courseID}"/>
-		<table>
-			<c:forEach var="dept" items="${list}">
-				<label>Major</label>		<input class="form-control input-sm" type="text" name="coursenum" value="${dept.major}"><br/>
-				<label>Department</label>	<input class="form-control input-sm" type="text" name="credits"   value="${dept.name}"><br/>
-			</c:forEach>
-		</table>
+		<input type="hidden" name="oldName" value="${oldName}"/>
+		<label>Department</label><input class="form-control input-sm" type="text" name="newName" value="${oldName}"><br/>
 		<button type="submit" class="btn btn-default">Save</button>
 	</form>
 

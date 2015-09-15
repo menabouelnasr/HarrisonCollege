@@ -25,11 +25,11 @@
 
 	<h3>Edit Major</h3><br/>
 	<form method="post" action="EditMajor">
-	<input type="hidden" name="courseID" value="${courseID}"/>
+	<input type="hidden" name="deptID" value="${deptID}"/>
 		<table>
 			<c:forEach var="dept" items="${list}">
-				<label>Course #</label>	<input class="form-control input-sm" type="text" name="coursenum" value="${dept.major}"><br/>
-				<label>Credits</label>	<input class="form-control input-sm" type="text" name="credits"   value="${dept.name}"><br/>
+				<label>Major</label>	 <input class="form-control input-sm" type="text" name="major" value="${dept.major}"><br/>
+				<label>Department</label><input class="form-control input-sm" type="text" name="name"  value="${dept.name}"><br/>
 			</c:forEach>
 		</table>
 		<button type="submit" class="btn btn-default">Save</button>

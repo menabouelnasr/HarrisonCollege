@@ -27,6 +27,9 @@ public class Admin extends HttpServlet {
 		removeRoom(request.getParameter("deleteRoomID"));
 		removeDept(request.getParameter("deleteDeptID"));
 		
+		System.out.println(DBUtil.get("SELECT d FROM Department d"));
+		System.out.println(DBUtil.get("SELECT DISTINCT d.name FROM Department d"));
+		
 		request.setAttribute("courses", listCourses(request));
 		request.setAttribute("rooms",   listRooms(request));
 		request.setAttribute("depts",   listDepts(request));
@@ -73,13 +76,17 @@ public class Admin extends HttpServlet {
 	
 	private String listDepts(HttpServletRequest request) {
 		String html = "";
-		for (Object o : DBUtil.get("SELECT d FROM Department d")) {
-			Department d = (Department)o;
-			html += "<tr><td>" + d.getId() + "</td>";
-			html += "<td>" + d.getName() + "</td>";
-			html += "<td>" + d.getMajor() + "</td>";
-			html += "<td><a href=\"EditDept?id=" + d.getId() + "\">Edit</a></td>";
-			html += "<td><a href=\"Admin?deleteDeptID=" + d.getId() + "\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a></td><tr/>";
+		for (Object o : DBUtil.get("SELECT DISTINCT d.name FROM Department d")) {
+			String s = (String)o;
+			html += "<tr><td><a href=\"EditDept?name=" + s + "\">" + s + "</a></td>";
+			html += "<td><a href=\"Admin?deleteDeptName=" + s + "\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a></td><tr/>";
+			/*
+			html += "<tr><td>" + s + "</td>"; //html += "<tr><td>" + d.getId() + "</td>";
+			//html += "<td>" + d.getName() + "</td>";
+			//html += "<td>" + d.getMajor() + "</td>";
+			html += "<td><a href=\"EditDept?name=" + s + "\">Edit</a></td>";
+			html += "<td><a href=\"Admin?deleteDeptName=" + s + "\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a></td><tr/>";
+			*/
 		}		
 		return html;
 	}
@@ -89,9 +96,8 @@ public class Admin extends HttpServlet {
 		for (Object o : DBUtil.get("SELECT d FROM Department d")) {
 			Department d = (Department)o;
 			html += "<tr><td>" + d.getId() + "</td>";
+			html += "<td><a href=\"EditMajor?id=" + d.getId() + "\">" + d.getMajor() + "</td>";
 			html += "<td>" + d.getName() + "</td>";
-			html += "<td>" + d.getMajor() + "</td>";
-			html += "<td><a href=\"EditMajor?id=" + d.getId() + "\">Edit</a></td>";
 			html += "<td><a href=\"Admin?deleteDeptID=" + d.getId() + "\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a></td><tr/>";
 		}		
 		return html;

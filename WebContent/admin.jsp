@@ -53,7 +53,7 @@
 		<h3>Departments</h3>
 		<table class="table table-hover table-condensed">
 			<thead><tr>
-				<th>#</th><th>Department</th><th>Major</th><th>Edit</th><th class="right">Delete</th>
+				<th>Department</th><th class="right">Delete</th>
 			</tr></thead>
 		    <tbody>
 				${depts}
@@ -64,7 +64,7 @@
 		<h3>Majors</h3>
 		<table class="table table-hover table-condensed">
 			<thead><tr>
-				<th>#</th><th>Department</th><th>Major</th><th>Edit</th><th class="right">Delete</th>
+				<th>#</th><th>Major</th><th>Department</th><th class="right">Delete</th>
 			</tr></thead>
 		    <tbody>
 				${majors}

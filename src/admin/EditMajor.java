@@ -18,7 +18,7 @@ public class EditMajor extends HttpServlet {
 		request.setAttribute("deptID", deptID);
 		java.util.List<Object> list = DBUtil.get("SELECT d FROM Department d WHERE d.id = " + deptID);		
 		request.setAttribute("list", list);
-		getServletContext().getRequestDispatcher("/admin/EditMajor.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/admin/editMajor.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,7 +34,7 @@ public class EditMajor extends HttpServlet {
 		}
 		
 		request.setAttribute("feedback", Util.successAlert("Course Updated!"));
-		getServletContext().getRequestDispatcher("/admin/EditMajor.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/admin/editMajor.jsp").forward(request, response);
 	}
 	
 }
