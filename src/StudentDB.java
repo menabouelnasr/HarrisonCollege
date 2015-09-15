@@ -71,10 +71,7 @@ public class StudentDB {
 				em.close();
 			}	
 		}
-		
-		
-
-			// TODO Auto-generated method stub
+	
 
 		public static List<Enroll> selectenrollbyid(int id){
 			EntityManager em= DBUtil.getEmFactory().createEntityManager();
@@ -90,9 +87,6 @@ public class StudentDB {
 				em.close();
 			}	
 		}
-		
-		
-	
 		public static List<Course> selectcourse(){
 			EntityManager em= DBUtil.getEmFactory().createEntityManager();
 			String query="SELECT s FROM Course s";
@@ -104,12 +98,8 @@ public class StudentDB {
 				return null;
 			}finally{
 				em.close();
-			}
-			
-		
-	}
-		
-		
+			}					
+	}		
 		public static List<Course> selectcoursebyid(int id){
 			EntityManager em= DBUtil.getEmFactory().createEntityManager();
 			String query="SELECT s FROM Course s";
@@ -122,8 +112,21 @@ public class StudentDB {
 			}finally{
 				em.close();
 			}
-			
+		}
+		
+			public static List<Enroll> selectbycurrent(){
+				EntityManager em= DBUtil.getEmFactory().createEntityManager();
+				String query="SELECT s FROM Enroll s where s.grade="+"'N/A'";
+				TypedQuery<Enroll> q = em.createQuery(query, model.Enroll.class);
+				try{
+					List<Enroll> students = q.getResultList();
+					return students;
+				} catch (Exception e){
+					e.printStackTrace();
+					return null;
+				}finally{
+					em.close();
+				}
+		}
 		
 	}
-	
-}

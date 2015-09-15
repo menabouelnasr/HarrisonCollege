@@ -1,5 +1,3 @@
-
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,8 +20,7 @@ import model.Enroll;
 @WebServlet("/GradeDetail")
 public class GradeDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	  private String grades;
-       
+	  private String grades;       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -57,8 +54,7 @@ public class GradeDetail extends HttpServlet {
 			}
 		};
 		
-		Collections.sort(cs, courseComparator);
-			
+		Collections.sort(cs, courseComparator);			
 		grades += "<div><table class='table table-bordered table-striped'>";
 		grades += "<thead>";
 		grades += "<th>";
@@ -90,8 +86,7 @@ public class GradeDetail extends HttpServlet {
 			+"<td>"
 			+ map.get((int) c.getId())
 			+"</td>"
-			+"</tr>";
-		
+			+"</tr>";		
 		}
 		grades += "</tbody>";
 		grades += "</table>";

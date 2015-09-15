@@ -1,6 +1,4 @@
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,35 +9,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import customTools.DBUtil;
-import model.Enroll;
-import model.Student;
 
 /**
- * Servlet implementation class Advisor
+ * Servlet implementation class AddDropCourse
  */
-@WebServlet("/Advisor")
-public class Advisor extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-    private String message;
+@WebServlet("/AddDropCourse")
+public class AddDropCourse extends HttpServlet {
+	private static final long serialVersionUID = 1L;       
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Advisor() {
+    public AddDropCourse() {
         super();
-        message = "";
+        // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	doPost(request, response);
-		}
-	
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String message="";
 		EntityManager em= DBUtil.getEmFactory().createEntityManager();
 		try{
@@ -55,13 +42,20 @@ public class Advisor extends HttpServlet {
 			}
 				message += "</tbody></table>";
 				message += "</div>";
-				
+			
 			request.setAttribute("message",message);
 			getServletContext().getRequestDispatcher("/transcript.jsp").forward(request, response);
 		}catch (Exception e){
 			e.printStackTrace();
 		}finally{
-			em.close();
-		}		
+			em.close();}
+		}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 	}
-}
+	
+	}

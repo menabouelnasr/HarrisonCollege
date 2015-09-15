@@ -47,7 +47,7 @@
           </ul>
         </li>
         <li><a href="Advisor">View Transcript</a></li>
-        <li><a href="#">Enroll/Drop Class</a></li>
+        <li><a href="AddDropCourse">Enroll/Drop Class</a></li>
       </ul>
     </div>
     <div class="clearfix visible-lg"></div>
