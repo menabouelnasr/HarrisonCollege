@@ -15,5 +15,5 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="list">Gosh!</a>
+      <a class="navbar-brand" href="list">Harrison College</a>
     </div>
