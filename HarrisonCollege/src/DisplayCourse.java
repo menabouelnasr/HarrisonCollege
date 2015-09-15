@@ -50,8 +50,8 @@ public class DisplayCourse extends HttpServlet {
 		String major = request.getParameter("major");
 		String subject = request.getParameter("subject");
 		String time = request.getParameter("time");
-		String html=""; 
-		String timeID="", instructorID="";
+		String html="", startTime="", endTime=""; 
+		String timeID="", instructorID="", day="";
 		System.out.println(semester + " "+ depName + " "+ instructor + " "+ major + " "+ subject +" "+time);
 		//if(!semester.equalsIgnoreCase("Any")&& depName.equalsIgnoreCase("Any")&&instructor.equalsIgnoreCase("Any")&&major.equalsIgnoreCase("Any")&&subject.equalsIgnoreCase("Any")&&time.equalsIgnoreCase("Any"))
 		//{
@@ -62,19 +62,29 @@ public class DisplayCourse extends HttpServlet {
 				
 				String qString = "SELECT t.time FROM Time t where t.id= '"+ n.getTimeid() + "'";
 		    	TypedQuery<String> q = em.createQuery(qString, String.class);
-		    	timeID= q.getSingleResult();
+		    	startTime= q.getSingleResult();
+		    	
+		    	String sString = "SELECT t.duration FROM Time t where t.id= '"+ n.getTimeid() + "'";
+		    	TypedQuery<String> s = em.createQuery(sString, String.class);
+		    	endTime= s.getSingleResult();
+		    	
+		    	String tString = "SELECT t.day FROM Time t where t.id= '"+ n.getTimeid() + "'";
+		    	TypedQuery<String> t = em.createQuery(tString, String.class);
+		    	day= t.getSingleResult();
 		    	
 		    	String mString = "SELECT i.name FROM Instructor i where i.id='"+ n.getInstructorid()+ "'"; //add instructor to DB                                                                                                                                  
 		    	TypedQuery<String> m = em.createQuery(mString, String.class);
 		    	instructorID= m.getSingleResult();
 
-				html += "<tr><td>" + n.getName()+ "</td>";
+				html += "<tr><td>" + n.getName()+" "+ n.getCoursenum()+ "</td>";
+				html += "<td>" + n.getSection() + "</td>";
 				html += "<td>" + n.getDescription() + "</td>";
 				html += "<td>" + n.getCredits()+ "</td>"; 
 				html += "<td>" + instructorID + "</td>";
-				html += "<td>" + timeID + "</td>";
+				html += "<td>" +  startTime + "-"+ endTime +"</td>";
+				html += "<td>" + day + "</td>";
 				html += "<td>" + n.getSubjectcode() + "</td>";
-				html += "<td><a href=\"purchased?enrollID=" + n.getId() + "\">" + "Enroll</a>" + "</td></tr>";
+				html += "<td><a href=\"EnrollStudent?enrollID=" + n.getId() + "&startTime="+startTime+ "&endTime="+endTime+"\">" + "Enroll</a>" + "</td></tr>";
 			} 
 		
 		//get rest from Ankushi

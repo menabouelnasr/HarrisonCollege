@@ -28,10 +28,12 @@
 			<thead>
 			<tr>
 				<th>Course Name</th>
+				<th>Section</th>
 				<th>Description</th>
 				<th>Credits</th>
 				<th>Instructor ID</th>
-				<th>Time ID</th>
+				<th>Course Time</th>
+				<th>Course Day</th>
 				<th>Subject Code</th>
 				<th></th>
 			</tr>
