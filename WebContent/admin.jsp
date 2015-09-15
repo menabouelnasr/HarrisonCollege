@@ -6,6 +6,14 @@
 		th.right {
 		    text-align: right;
 		}
+		td.this {
+			padding: 0px 10px 0px 10px;
+		}
+		.tt {
+			position: relative;
+			left: 15px;
+			top: 10px;
+		}
 	</style>
 <jsp:include page="includes/navAndHeader.jsp"/>
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -78,16 +86,21 @@
 		<hr/>
 		<h3>Set User Account Types</h3>
 		<form method="post" action="Admin">
-			<label>User ID</label>	<input class="form-control input-sm" type="text" name="userID"   placeholder="User ID"><br/>
-			
-			<select name="userType" >
-			  <option value="Student">Student</option>
-			  <option value="Instructor">Instructor</option>
-			  <option value="Advisor">Advisor</option>
-			  <option value="Admin">Admin</option>
-			</select>
-			
-			<button type="submit" class="btn btn-default">Save</button>
+			<table width="100%">
+			<thead><th><div class="tt">ID</div></th><th><div class="tt">Type</div></th><th></th></thead>
+			<tr><td width="100%" class="this">
+				<label> </label>	<input class="form-control input-sm" type="text" name="userID"   placeholder="User ID"><br/>
+				</td><td class="this">
+				
+				<select name="userType" >
+				  <option value="Student">Student</option>
+				  <option value="Instructor">Instructor</option>
+				  <option value="Advisor">Advisor</option>
+				  <option value="Admin">Admin</option>
+				</select>
+				</td><td class="this">
+				<button type="submit" class="btn btn-default">Save</button>
+			</td></tr></table>
 		</form>
 		
 	</div>

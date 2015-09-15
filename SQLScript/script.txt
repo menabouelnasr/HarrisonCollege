@@ -154,21 +154,21 @@ CREATE TABLE time (
 	time VARCHAR(16),
 	duration Varchar(10)
 );
-INSERT INTO Time (id, courseID, day, time, duration) VALUES (1, null, 'MWF', '8a - 9a', null);
-INSERT INTO Time (id, courseID, day, time, duration) VALUES (2, null, 'MWF', '9a - 10a', null);
-INSERT INTO Time (id, courseID, day, time, duration) VALUES (3, null, 'MWF', '10a - 11a', null);
-INSERT INTO Time (id, courseID, day, time, duration) VALUES (4, null, 'MWF', '11a - 12p', null);
-INSERT INTO Time (id, courseID, day, time, duration) VALUES (5, null, 'MWF', '12a - 1p', null);
-INSERT INTO Time (id, courseID, day, time, duration) VALUES (6, null, 'MWF', '1a - 2p', null);
-INSERT INTO Time (id, courseID, day, time, duration) VALUES (7, null, 'MWF', '2a - 3p', null);
-INSERT INTO Time (id, courseID, day, time, duration) VALUES (8, null, 'MWF', '3a - 4p', null);
+INSERT INTO Time (id, courseID, day, time, duration) VALUES (1, null, 'MWF',  '8:00',  '9:00');
+INSERT INTO Time (id, courseID, day, time, duration) VALUES (2, null, 'MWF',  '9:00', '10:00');
+INSERT INTO Time (id, courseID, day, time, duration) VALUES (3, null, 'MWF', '10:00', '11:00');
+INSERT INTO Time (id, courseID, day, time, duration) VALUES (4, null, 'MWF', '11:00', '12:00');
+INSERT INTO Time (id, courseID, day, time, duration) VALUES (5, null, 'MWF', '12:00', '13:00');
+INSERT INTO Time (id, courseID, day, time, duration) VALUES (6, null, 'MWF', '13:00', '14:00');
+INSERT INTO Time (id, courseID, day, time, duration) VALUES (7, null, 'MWF', '14:00', '15:00');
+INSERT INTO Time (id, courseID, day, time, duration) VALUES (8, null, 'MWF', '15:00', '16:00');
 
-INSERT INTO Time (id, courseID, day, time, duration) VALUES (9,  null, 'TuTh', '8a - 9:30a', null);
-INSERT INTO Time (id, courseID, day, time, duration) VALUES (10, null, 'TuTh', '9:30a - 11a', null);
-INSERT INTO Time (id, courseID, day, time, duration) VALUES (11, null, 'TuTh', '11a - 12:30p', null);
-INSERT INTO Time (id, courseID, day, time, duration) VALUES (12, null, 'TuTh', '12:30p - 2p', null);
-INSERT INTO Time (id, courseID, day, time, duration) VALUES (13, null, 'TuTh', '2p - 3:30p', null);
-INSERT INTO Time (id, courseID, day, time, duration) VALUES (14, null, 'TuTh', '3:30p - 5p', null);
+INSERT INTO Time (id, courseID, day, time, duration) VALUES (9,  null, 'TuTh',  '8:00',  '9:30');
+INSERT INTO Time (id, courseID, day, time, duration) VALUES (10, null, 'TuTh',  '9:30', '11:00');
+INSERT INTO Time (id, courseID, day, time, duration) VALUES (11, null, 'TuTh', '11:00', '12:30');
+INSERT INTO Time (id, courseID, day, time, duration) VALUES (12, null, 'TuTh', '12:30', '14:00');
+INSERT INTO Time (id, courseID, day, time, duration) VALUES (13, null, 'TuTh', '14:00', '15:30');
+INSERT INTO Time (id, courseID, day, time, duration) VALUES (14, null, 'TuTh', '15:30', '17:00');
 SELECT * FROM Time;
 	
 Create table Classroom (
@@ -214,3 +214,6 @@ CREATE SEQUENCE TIME_ID_GENERATOR;
 CREATE SEQUENCE USRS_ID_GENERATOR;
 
 
+
+
+SELECT * FROM course WHERE 1=1 AND semester='Spring 2015';

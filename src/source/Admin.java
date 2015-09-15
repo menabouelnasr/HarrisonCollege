@@ -145,10 +145,9 @@ public class Admin extends HttpServlet {
 
 		for (Object o : DBUtil.get("SELECT u FROM Usr u WHERE u.id = " + userID)) {
 			Usr u = (Usr)o;
-			
 			u.setType(userType.toLowerCase());
 			
-			/*if (userType.equals("Student")) {
+			if (userType.equals("Student")) {
 				model.Student s = new model.Student();
 				DBUtil.insert(s);
 				u.setTypeid(s.getId());;
@@ -160,9 +159,9 @@ public class Admin extends HttpServlet {
 				// do nothing
 			} else if (userType.equals("Admin")) {
 				// do nothing
-			}*/
+			}
 			
-			
+			DBUtil.update(u);
 			request.setAttribute("feedback", Util.successAlert("User's Type Successfully Updated!"));
 			return;
 		}
