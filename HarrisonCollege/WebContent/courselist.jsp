@@ -17,7 +17,7 @@
 </nav>
 
 	<div class="container">	
-		<form role="form" method="post" action="CourseList">
+		<form role="form" method="post" action="DisplayCourse">
 			<div class="form-group">
 				<input type="text" class="form-control" name="search" placeholder="Search"> <!-- autofocus -->
 			</div>
@@ -38,7 +38,7 @@
 			
 				
 		    <tbody><tr>
-		    <form role="form" method="post" action="CourseList">
+		    <form role="form" method="post" action="DisplayCourse">
 			<td><select name="semester">
 				<option selected="selected"> Any </option>
 				<c:forEach var="item" items="${semesters}">
@@ -66,7 +66,7 @@
 			<td><select name="instructor">	
 				<option selected="selected">Any</option>
 				<c:forEach var="item" items="${instructor}">
-				<option value='${item}'>${item}</option>
+				<option value='${item.id}'>${item.name}</option>
 				</c:forEach>
 			</select></td>
 			<td><select name="time">	

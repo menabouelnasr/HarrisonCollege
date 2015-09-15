@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 
 
@@ -9,11 +10,14 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name="Student", schema="TESTDB")
 @NamedQuery(name="Student.findAll", query="SELECT s FROM Student s")
 public class Student implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(schema="TESTDB", name="STUDENT_ID_GENERATOR", sequenceName="STUDENT_ID_GENERATOR", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="STUDENT_ID_GENERATOR")
 	private long id;
 
 	private String entryyear;
@@ -25,6 +29,13 @@ public class Student implements Serializable {
 	private String name;
 
 	public Student() {
+	}
+	public Student(String name, String gradYear, String entryYear, String major) 
+	{
+		this.major = major;
+		this.name = name;
+		this.gradyear = gradYear;
+		this.entryyear=entryYear;
 	}
 
 	public long getId() {

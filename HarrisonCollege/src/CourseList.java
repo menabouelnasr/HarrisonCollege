@@ -69,20 +69,20 @@ public class CourseList extends HttpServlet
 			}
 		}
 		List<Instructor> instructor = DBUtil.getInstructor("SELECT i FROM Instructor i");
-		List<String> prof=new ArrayList<String>();
-		for (int i=0; i<instructor.size();i++)
-		{
-			if(!prof.contains(instructor.get(i).getName()))
-			{
-				prof.add(instructor.get(i).getName());
-			}
-		}
+//		List<String> prof=new ArrayList<String>();
+//		for (int i=0; i<instructor.size();i++)
+//		{
+//			if(!prof.contains(instructor.get(i).getName()))
+//			{
+//				prof.add(instructor.get(i).getName());
+//			}
+//		}
 		String[] time = {"MWF", "TTH"};
 		request.setAttribute("semesters", semesters);
 		request.setAttribute("depName", depName);
 		request.setAttribute("subject", subject);
 		request.setAttribute("major", major);
-		request.setAttribute("instructor", prof);
+		request.setAttribute("instructor", instructor);
 		request.setAttribute("time", time);
 		
 		getServletContext().getRequestDispatcher("/courselist.jsp").forward(request, response);
@@ -93,14 +93,7 @@ public class CourseList extends HttpServlet
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		String semester = request.getParameter("semester");
-		String depName = request.getParameter("depName");
-		String instructor = request.getParameter("instructor");
-		String major = request.getParameter("major");
-		String subject = request.getParameter("subject");
-		String time = request.getParameter("time");
-	
-		System.out.println(semester + " "+ depName + " "+ instructor + " "+ major + " "+ subject +" "+time);
+		
 	}
 
 }

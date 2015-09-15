@@ -2,6 +2,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -41,17 +43,19 @@ public class Login extends HttpServlet {
 	
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
 		// Get From Form
 		String type     = request.getParameter("type");
 		String email    = request.getParameter("email");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-
+		String major    = request.getParameter("major");
+		String entryYear= request.getParameter("entry");
+		String gradYear = request.getParameter("grad");
+	
 		if (type == null || type.equals("")) {
 			// do nothing
 		} else if (type.equals("1")) {
-			if (signup(email, username, password, 0)) {
+			if (signup(email, username, password, 0, major,entryYear,gradYear)) {
 				request.setAttribute("feedback", Util.successAlert("User created succcessfully!")); 
 			} else {
 				request.setAttribute("feedback", Util.failAlert("Invalid data entered.")); 
@@ -69,14 +73,40 @@ public class Login extends HttpServlet {
 		
 		request.setAttribute("navRight", Util.checkLogin(request)); 
 	}
+
 	
-	private boolean signup(String email, String username, String password, int type) {
-		if (hasNull(email, username, password)) { return false; }
-	
-		DBUtil.insert(new Usr(email, username, password, "student", 1, "0"));
+	private boolean signup(String email, String username, String password, int type, String major, String entryYear, String gradYear) {
+		
+		if (hasNull(email, username, password)) 
+		{ return false; 
+		}
+		else
+		{
+			Usr u= new Usr(email, username, password, "student", 1,"0");
+			DBUtil.insert(u);
+			createStudent(username,major, entryYear, gradYear);
+		}
 		return true;
 	}
-	
+	private boolean createStudent(String username,String major, String entryYear, String gradYear) 
+	{	EntityManager em = DBUtil.getEmFactory().createEntityManager();
+		long userID=0,ID = 0;
+		
+		DBUtil.insert(new Student(username, major,entryYear,gradYear));
+		
+		String qString = "Select max(s.id) from Student s";
+    	TypedQuery<Long> q = em.createQuery(qString, Long.class);
+    	ID= q.getSingleResult();
+    	System.out.println(ID);
+    	
+    	String mString = "Select max(u.id) from Usr u";
+    	TypedQuery<Long> m = em.createQuery(mString, Long.class);
+    	userID= m.getSingleResult();
+    	System.out.println(userID);
+    	
+    	DBUtil.insertUpdate(ID, userID);
+		return true;
+	}
 	private long login(String username, String password) {
 		if (hasNull("x", username, password)) { return -1; }
 		
