@@ -20,6 +20,9 @@
 </nav>
 
 	<div class="container">	
+	
+		${feedback}
+	
 	 	<h2>Admin</h2>
 	 	
 	 	<hr/>
@@ -75,8 +78,15 @@
 		<hr/>
 		<h3>Set User Account Types</h3>
 		<form method="post" action="Admin">
-			<label>User ID</label>	<input class="form-control input-sm" type="text" name="major" placeholder="User ID"><br/>
-			<label>User Type</label><input class="form-control input-sm" type="text" name="name"  placeholder=""><br/>
+			<label>User ID</label>	<input class="form-control input-sm" type="text" name="userID"   placeholder="User ID"><br/>
+			
+			<select name="userType" >
+			  <option value="Student">Student</option>
+			  <option value="Instructor">Instructor</option>
+			  <option value="Advisor">Advisor</option>
+			  <option value="Admin">Admin</option>
+			</select>
+			
 			<button type="submit" class="btn btn-default">Save</button>
 		</form>
 		

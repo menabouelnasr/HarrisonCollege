@@ -1,0 +1,16 @@
+		/*
+		 Code doesn't actually compile:
+		String semester = request.getParameter("semester");
+		String instructor = request.getParameter("semester");
+		String room = request.getParameter("semester");
+		String time = request.getParameter("semester");
+		
+		String query = "SELECT c FROM Course c WHERE true ";
+		if (semester != null "") {
+			query += "AND c.semester = " + semester;
+		}
+		if (instructor != null "") {
+			query += "AND c.semester = " + semester;
+		}
+		DBUtil.get(query);
+		*/

@@ -124,31 +124,49 @@ public class Admin extends HttpServlet {
 			DBUtil.delete(o);
 	}
 	
-	private void setUserType(HttpServletRequest request) {
-		String userID   = request.getParameter("userID");
+	private void setUserType(HttpServletRequest request) {		
+		String userID   = request.getParameter("userID");		
 		String userType = request.getParameter("userType");
+		
+		System.out.println("SetUserType:");
+		System.out.println(userID);
+		System.out.println(userType);
+		
+		if (userID == null || userID.equals("")) { 
+			request.setAttribute("feedback", Util.failAlert("Invalid Input"));
+			return; 
+		}
+		try {
+			Integer.parseInt(userID);
+		} catch (Exception e) {
+			request.setAttribute("feedback", Util.failAlert("Invalid User ID"));
+			return;
+		}
+
 		for (Object o : DBUtil.get("SELECT u FROM Usr u WHERE u.id = " + userID)) {
 			Usr u = (Usr)o;
 			
-			u.setType(userType);
+			u.setType(userType.toLowerCase());
 			
-			if (userType.equals("student")) {
+			/*if (userType.equals("Student")) {
 				model.Student s = new model.Student();
 				DBUtil.insert(s);
 				u.setTypeid(s.getId());;
-			} else if (userType.equals("instructor")) {
+			} else if (userType.equals("Instructor")) {
 				model.Instructor i = new model.Instructor();
 				DBUtil.insert(i);
 				u.setTypeid(i.getId());
-			} else if (userType.equals("advisor")) {
+			} else if (userType.equals("Advisor")) {
 				// do nothing
-			} else if (userType.equals("admin")) {
+			} else if (userType.equals("Admin")) {
 				// do nothing
-			}
+			}*/
 			
 			
-			
+			request.setAttribute("feedback", Util.successAlert("User's Type Successfully Updated!"));
+			return;
 		}
+		request.setAttribute("feedback", Util.failAlert("Invalid User ID"));
 	}
 	
 	/*
@@ -178,6 +196,12 @@ view all courses in a department
 view all current classes in a department
 view all majors in a department
 	 */
+	
+	
+	
+	
+	
+	
 	
 	
 }
