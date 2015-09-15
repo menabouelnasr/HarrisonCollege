@@ -149,4 +149,14 @@ public class Course implements Serializable {
 		this.timeid = timeid;
 	}
 
+	@Override
+	public String toString() {
+		return "Course [id=" + id + ", coursenum=" + coursenum + ", credits="
+				+ credits + ", deptid=" + deptid + ", description="
+				+ description + ", enabled=" + enabled + ", instructorid="
+				+ instructorid + ", name=" + name + ", roomid=" + roomid
+				+ ", section=" + section + ", semester=" + semester
+				+ ", subjectcode=" + subjectcode + ", timeid=" + timeid + "]";
+	}
+	
 }

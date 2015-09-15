@@ -1,5 +1,6 @@
 package source;
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,10 +15,13 @@ public class Admin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);
+		getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);
+		setUserType(request);
+		getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
 	}
 	
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,12 +38,16 @@ public class Admin extends HttpServlet {
 		request.setAttribute("rooms",   listRooms(request));
 		request.setAttribute("depts",   listDepts(request));
 		request.setAttribute("majors",  listMajors(request));
-		getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
 	}
 	
 	private String listCourses(HttpServletRequest request) {
 		String html = "";
+		
+		System.out.println("LIST COURSES: ");
 		for (Object o : DBUtil.get("SELECT c FROM Course c")) {
+			
+			System.out.println(o);
+			
 			Course c = (Course)o;
 			html += "<tr><td>" + c.getId() + "</td>";
 			html += "<td>" + c.getEnabled() + "</td>";
@@ -114,6 +122,33 @@ public class Admin extends HttpServlet {
 	private void removeDept(String deptID) {
 		for (Object o : DBUtil.get("SELECT d FROM Department d WHERE d.id = " + deptID))
 			DBUtil.delete(o);
+	}
+	
+	private void setUserType(HttpServletRequest request) {
+		String userID   = request.getParameter("userID");
+		String userType = request.getParameter("userType");
+		for (Object o : DBUtil.get("SELECT u FROM Usr u WHERE u.id = " + userID)) {
+			Usr u = (Usr)o;
+			
+			u.setType(userType);
+			
+			if (userType.equals("student")) {
+				model.Student s = new model.Student();
+				DBUtil.insert(s);
+				u.setTypeid(s.getId());;
+			} else if (userType.equals("instructor")) {
+				model.Instructor i = new model.Instructor();
+				DBUtil.insert(i);
+				u.setTypeid(i.getId());
+			} else if (userType.equals("advisor")) {
+				// do nothing
+			} else if (userType.equals("admin")) {
+				// do nothing
+			}
+			
+			
+			
+		}
 	}
 	
 	/*

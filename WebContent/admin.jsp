@@ -71,6 +71,15 @@
 		    </tbody>
 		</table>
 		<a href="NewMajor">Add New Major</a>
+		
+		<hr/>
+		<h3>Set User Account Types</h3>
+		<form method="post" action="Admin">
+			<label>User ID</label>	<input class="form-control input-sm" type="text" name="major" placeholder="User ID"><br/>
+			<label>User Type</label><input class="form-control input-sm" type="text" name="name"  placeholder=""><br/>
+			<button type="submit" class="btn btn-default">Save</button>
+		</form>
+		
 	</div>
 </body>
 </html>

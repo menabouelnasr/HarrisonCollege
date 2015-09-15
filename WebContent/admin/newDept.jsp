@@ -26,8 +26,8 @@
 	<h3>New Department</h3><br/>
 	<form method="post" action="NewDept">
 	<input type="hidden" name="courseID" value="${courseID}"/>
-		<label>Major</label>		<input class="form-control input-sm" type="text" name="coursenum" value="${dept.major}"><br/>
-		<label>Department</label>	<input class="form-control input-sm" type="text" name="credits"   value="${dept.name}"><br/>
+		<label>Major</label>	 <input class="form-control input-sm" type="text" name="major" value="${dept.major}"><br/>
+		<label>Department</label><input class="form-control input-sm" type="text" name="name"  value="${dept.name}"><br/>
 		<button type="submit" class="btn btn-default">Save</button>
 	</form>
 
