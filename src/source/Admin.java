@@ -82,6 +82,7 @@ public class Admin extends HttpServlet {
 		return html;
 	}
 	
+	
 	private String listDepts(HttpServletRequest request) {
 		String html = "";
 		for (Object o : DBUtil.get("SELECT DISTINCT d.name FROM Department d")) {

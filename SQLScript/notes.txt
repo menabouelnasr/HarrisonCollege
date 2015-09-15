@@ -14,3 +14,31 @@
 		}
 		DBUtil.get(query);
 		*/
+		
+		
+	
+	private boolean test(HttpServletRequest request) {
+		String courseID = request.getParameter("courseID");
+		String studID = request.getParameter("studID");
+		
+		Course thisCourse = (Course) DBUtil.get("SELECT c FROM Course c WHERE c.id = " + courseID).get(0);
+		
+		// for each course in this student's schedule...
+		for (Object o1 : DBUtil.get("SELECT e FROM Enroll e WHERE e.studid = " + studID)) {
+			Enroll e = (Enroll)o1;
+			
+			// check if thisCourse conflicts with thisStudent's schedule
+			Course currCourse = (Course) DBUtil.get("SELECT c FROM Course c WHERE c.id = " + e.getCourseid()).get(0);
+			
+			if (conflicts(thisCourse, currCourse)) {
+				return false;
+			}
+		}
+		return true;	
+	}
+	
+	
+	private boolean conflicts(Course c1, Course c2) {
+		
+		return true;
+	}
