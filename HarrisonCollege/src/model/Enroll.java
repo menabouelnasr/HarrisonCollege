@@ -9,11 +9,14 @@ import javax.persistence.*;
  * 
  */
 @Entity
+@Table(name="ENROLL", schema="TESTDB")
 @NamedQuery(name="Enroll.findAll", query="SELECT e FROM Enroll e")
 public class Enroll implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@SequenceGenerator(schema="TESTDB", name="ENROLL_ID_GENERATOR", sequenceName="ENROLL_ID_GENERATOR", allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ENROLL_ID_GENERATOR")
 	private long id;
 
 	private int courseid;
@@ -24,7 +27,13 @@ public class Enroll implements Serializable {
 
 	public Enroll() {
 	}
-
+	public Enroll(int studID, int courseID, String Grade )
+	{
+		this.courseid=courseID;
+		this.studid=studID;
+		this.grade=Grade;
+		
+	}
 	public long getId() {
 		return this.id;
 	}

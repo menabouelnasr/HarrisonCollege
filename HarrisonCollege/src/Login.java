@@ -42,7 +42,7 @@ public class Login extends HttpServlet {
 	public void destroy() { }
 	
 	private void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		EntityManager em = DBUtil.getEmFactory().createEntityManager();
 		// Get From Form
 		String type     = request.getParameter("type");
 		String email    = request.getParameter("email");
@@ -51,11 +51,12 @@ public class Login extends HttpServlet {
 		String major    = request.getParameter("major");
 		String entryYear= request.getParameter("entry");
 		String gradYear = request.getParameter("grad");
-	
+		String studType="";
+		
 		if (type == null || type.equals("")) {
 			// do nothing
 		} else if (type.equals("1")) {
-			if (signup(email, username, password, 0, major,entryYear,gradYear)) {
+			if (signup(email, username, password, 0, major,entryYear,gradYear, request)) {
 				request.setAttribute("feedback", Util.successAlert("User created succcessfully!")); 
 			} else {
 				request.setAttribute("feedback", Util.failAlert("Invalid data entered.")); 
@@ -68,6 +69,16 @@ public class Login extends HttpServlet {
 				request.getSession().setAttribute("userID", id);
 				request.setAttribute("feedback", Util.successAlert("Log In Successful!")); 
 				System.out.println("USERID: " + request.getSession().getAttribute("userID"));
+				
+				String sString = "SELECT u.type FROM Usr u where u.id= '"+ request.getSession().getAttribute("userID") + "'";
+		    	TypedQuery<String> s = em.createQuery(sString, String.class);
+		    	studType= s.getSingleResult();
+		    	System.out.println(studType);
+		    	System.out.println("student id: "+id);
+		    	if(studType.equalsIgnoreCase("student"))
+		    	{
+		    		request.getSession().setAttribute("studID", id);
+		    	}
 			}
 		}
 		
@@ -75,7 +86,7 @@ public class Login extends HttpServlet {
 	}
 
 	
-	private boolean signup(String email, String username, String password, int type, String major, String entryYear, String gradYear) {
+	private boolean signup(String email, String username, String password, int type, String major, String entryYear, String gradYear, HttpServletRequest request) {
 		
 		if (hasNull(email, username, password)) 
 		{ return false; 
@@ -84,20 +95,23 @@ public class Login extends HttpServlet {
 		{
 			Usr u= new Usr(email, username, password, "student", 1,"0");
 			DBUtil.insert(u);
-			createStudent(username,major, entryYear, gradYear);
+			createStudent(username,major, entryYear, gradYear, request);
 		}
 		return true;
 	}
-	private boolean createStudent(String username,String major, String entryYear, String gradYear) 
+	private boolean createStudent(String username,String major, String entryYear, String gradYear, HttpServletRequest request) 
 	{	EntityManager em = DBUtil.getEmFactory().createEntityManager();
-		long userID=0,ID = 0;
+		long userID=0, ID = 0;
 		
 		DBUtil.insert(new Student(username, major,entryYear,gradYear));
 		
 		String qString = "Select max(s.id) from Student s";
     	TypedQuery<Long> q = em.createQuery(qString, Long.class);
     	ID= q.getSingleResult();
-    	System.out.println(ID);
+    	System.out.println("Student ID: "+ID);
+    	
+    	request.getSession().setAttribute("studID", ID);
+    	
     	
     	String mString = "Select max(u.id) from Usr u";
     	TypedQuery<Long> m = em.createQuery(mString, Long.class);

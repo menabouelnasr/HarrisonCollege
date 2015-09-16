@@ -20,6 +20,9 @@ public class DBUtil {
 	public static java.util.List<Department> getDepartment(String qString) {
 		return emf.createEntityManager().createQuery(qString, Department.class).getResultList();
 	}
+	public static java.util.List<Enroll> getEnroll(String qString) {
+		return emf.createEntityManager().createQuery(qString, Enroll.class).getResultList();
+	}
 	public static java.util.List<Instructor> getInstructor(String qString) {
 		return emf.createEntityManager().createQuery(qString, Instructor.class).getResultList();
 	}

@@ -31,7 +31,7 @@
 				<th>Section</th>
 				<th>Description</th>
 				<th>Credits</th>
-				<th>Instructor ID</th>
+				<th>Instructor</th>
 				<th>Course Time</th>
 				<th>Course Day</th>
 				<th>Subject Code</th>
