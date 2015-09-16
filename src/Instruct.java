@@ -111,6 +111,7 @@ public class Instruct extends HttpServlet {
 					
 				List<Course> course_list = DBUtil.getCourse(query);
 				display += getCourseLine(course_list);
+				
 				getDropDownValue(request);
 				request.setAttribute("tabledisp", display);
 				
@@ -119,6 +120,15 @@ public class Instruct extends HttpServlet {
 
 		
 private void getDropDownValue(HttpServletRequest request) {
+		String semester = request.getParameter("semester");
+		String depId = request.getParameter("depName");
+		String instruct = request.getParameter("instructor");
+		String major = request.getParameter("major");
+		String sub = request.getParameter("subject");
+		String tm = request.getParameter("time");
+		
+		System.out.println(semester + " "+ depId + " "+ instruct + " "+ major + " "+ sub +" "+tm);
+
 			String html="";
 			List<Course> courses = DBUtil.getCourse("SELECT c FROM Course c");
 			List<String> semesters=new ArrayList<String>();

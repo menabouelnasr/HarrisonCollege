@@ -25,8 +25,9 @@ public class Enroll implements Serializable {
 	private int studid;
 
 	public Enroll() {
+		
 	}
-
+	
 	public int getId() {
 		return this.id;
 	}

@@ -1,4 +1,5 @@
 import java.util.List;
+
 import model.*;
 
 import javax.persistence.EntityManager;
@@ -77,6 +78,12 @@ public class DBUtil {
 	public static java.util.List<Time> getTime(String qString) {
 		return emf.createEntityManager().createQuery(qString, Time.class).getResultList();
 	}
-	
+	public static java.util.List<Enroll> getEnroll(String qString) {
+		return emf.createEntityManager().createQuery(qString, Enroll.class).getResultList();
+	}
+
+	public static java.util.List<Student> getStudent(String qString) {
+		return emf.createEntityManager().createQuery(qString, Student.class).getResultList();
+	}
 	
 }
