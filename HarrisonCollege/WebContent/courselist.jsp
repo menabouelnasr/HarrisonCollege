@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
 	<title>List</title>
+	
 <jsp:include page="includes/navAndHeader.jsp"/>
 
     <div class="collapse navbar-collapse" id="myNavbar">

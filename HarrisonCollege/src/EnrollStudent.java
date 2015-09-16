@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Classroom;
 import model.Course;
 import model.DBUtil;
 import model.Enroll;
@@ -36,7 +37,7 @@ public class EnrollStudent extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-    private String test(HttpServletRequest request) 
+    private String checkEnrollment(HttpServletRequest request) 
     {
     	EntityManager em = DBUtil.getEmFactory().createEntityManager();
     	Long studID= (Long) request.getSession().getAttribute("studID");
@@ -58,7 +59,7 @@ public class EnrollStudent extends HttpServlet {
 		{
 			Enroll u= new Enroll(sID, Integer.parseInt(courseID), "U");
 			DBUtil.insert(u);
-			return "first entry";
+			return "Course Enrolled";
 		}
 		else
 		{
@@ -99,13 +100,32 @@ public class EnrollStudent extends HttpServlet {
 		}
 		return "false";
 	}
-	
-	
+	//finish max capacity 
+    private String checkCapacity(HttpServletRequest request) 
+    {
+    	Long studID= (Long) request.getSession().getAttribute("studID");
+    	String courseID = request.getParameter("enrollID");
+    
+    	int maxCap=0,student=0;
+    	for (Object o : DBUtil.get("SELECT e FROM Enroll e WHERE e.courseid = " + courseID )) //gets all enrolled students for a course
+		{
+    		Course c = (Course)o;
+    		Classroom room = (Classroom) DBUtil.get("SELECT c FROM Classroom c WHERE c.id = " + c.getRoomid());
+    		maxCap= Integer.parseInt(room.getMaxcap());
+    		student++;
+		}
+    	if(student-maxCap>0)
+    	{
+    		return "true";
+    	}
+    	return "false";
+    }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Util.processUser(request);
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
-		String output= test(request); //checks enrollment
+		String output= checkEnrollment(request); //checks enrollment
+		String capacity= checkCapacity(request); //checks capacity
 		System.out.println("Output: "+ output);
 		Long studID= (Long) request.getSession().getAttribute("studID");
 		
@@ -116,7 +136,7 @@ public class EnrollStudent extends HttpServlet {
 			getServletContext().getRequestDispatcher("/studentschedule.jsp").forward(request, response);
 		}
 		else
-			if(output.equalsIgnoreCase("Course Enrolled") ||output.equalsIgnoreCase("first entry") )
+			if(output.equalsIgnoreCase("Course Enrolled") && capacity.equalsIgnoreCase("true") )
 			{
 				for (Object o : DBUtil.get("SELECT e FROM Enroll e WHERE e.studid = " + studID)) 
 				{

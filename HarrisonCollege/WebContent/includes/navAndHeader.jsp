@@ -4,6 +4,14 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<style>
+	body {
+    background-image:url(Images/HarrisonCollege.png);
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment: fixed;
+	}
+	</style>
 </head>
 <body>
 
@@ -15,5 +23,5 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="Homepage">Welcome to Harrison University</a>
+      <a class="navbar-brand" href="Homepage">Harrison College</a>
     </div>

@@ -11,8 +11,9 @@
 	<style>
 	body {
     background-image:url(Images/HarrisonCollege.png);
-    background-position:50% -200%;
-    background-repeat:no-repeat
+    background-position:center;
+    background-repeat:no-repeat;
+    background-attachment: fixed;
 	}
 </style>
 </head>
