@@ -13,6 +13,7 @@ import model.DBUtil;
 import model.Department;
 import model.Instructor;
 import model.Time;
+import model.Util;
 
 /**
  * Servlet implementation class CourseList
@@ -36,6 +37,7 @@ public class CourseList extends HttpServlet
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
+		Util.processUser(request);
 		//semester, subject, instructor, time, department, major
 		String html="";
 		List<Course> courses = DBUtil.getCourse("SELECT c FROM Course c");

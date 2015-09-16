@@ -16,6 +16,7 @@ import model.Course;
 import model.DBUtil;
 import model.Enroll;
 import model.Usr;
+import model.Util;
 
 /**
  * Servlet implementation class EnrollStudent
@@ -102,9 +103,11 @@ public class EnrollStudent extends HttpServlet {
 	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Util.processUser(request);
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
-		String output= test(request);
+		String output= test(request); //checks enrollment
 		System.out.println("Output: "+ output);
+		Long studID= (Long) request.getSession().getAttribute("studID");
 		
 		String html="", startTime="", endTime="", day="", instructorID="";
 		if(output.equalsIgnoreCase("Courses Overlap"))
@@ -113,45 +116,44 @@ public class EnrollStudent extends HttpServlet {
 			getServletContext().getRequestDispatcher("/enrollstudent.jsp").forward(request, response);
 		}
 		else
-			if(output.equalsIgnoreCase("Course Enrolled"))
+			if(output.equalsIgnoreCase("Course Enrolled") ||output.equalsIgnoreCase("first entry") )
 			{
-				String courseID = request.getParameter("enrollID");
-				Course n = (Course) DBUtil.get("SELECT c FROM Course c WHERE c.id = " + courseID).get(0);
-				
-				String qString = "SELECT t.time FROM Time t where t.id= '"+ n.getTimeid() + "'";
-		    	TypedQuery<String> q = em.createQuery(qString, String.class);
-		    	startTime= q.getSingleResult();
-		    	
-		    	String sString = "SELECT t.duration FROM Time t where t.id= '"+ n.getTimeid() + "'";
-		    	TypedQuery<String> s = em.createQuery(sString, String.class);
-		    	endTime= s.getSingleResult();
-		    	
-		    	String tString = "SELECT t.day FROM Time t where t.id= '"+ n.getTimeid() + "'";
-		    	TypedQuery<String> t = em.createQuery(tString, String.class);
-		    	day= t.getSingleResult();
-		    	
-		    	String mString = "SELECT i.name FROM Instructor i where i.id='"+ n.getInstructorid()+ "'"; //add instructor to DB                                                                                                                                  
-		    	TypedQuery<String> m = em.createQuery(mString, String.class);
-		    	instructorID= m.getSingleResult();
-
-				html += "<tr><td>" + n.getName()+" "+ n.getCoursenum()+ "</td>";
-				html += "<td>" + n.getSection() + "</td>";
-				html += "<td>" + n.getDescription() + "</td>";
-				html += "<td>" + n.getCredits()+ "</td>"; 
-				html += "<td>" + instructorID + "</td>";
-				html += "<td>" +  startTime + "-"+ endTime +"</td>";
-				html += "<td>" + day + "</td>";
-				html += "<td>" + n.getSubjectcode() + "</td>";
-				html += "<td><a href=\"EnrollStudent?enrollID=" + n.getId() + "&startTime="+startTime+ "&endTime="+endTime+"\">" + "Enroll</a>" + "</td></tr>";
-				
-				request.setAttribute("outcome", "Course Successfully Enrolled!");
+				for (Object o : DBUtil.get("SELECT e FROM Enroll e WHERE e.studid = " + studID)) 
+				{
+					Enroll c = (Enroll)o;
+					Course n = (Course) DBUtil.get("SELECT c FROM Course c WHERE c.id = " + c.getCourseid()).get(0);
+					
+					String qString = "SELECT t.time FROM Time t where t.id= '"+ n.getTimeid() + "'";
+			    	TypedQuery<String> q = em.createQuery(qString, String.class);
+			    	startTime= q.getSingleResult();
+			    	
+			    	String sString = "SELECT t.duration FROM Time t where t.id= '"+ n.getTimeid() + "'";
+			    	TypedQuery<String> s = em.createQuery(sString, String.class);
+			    	endTime= s.getSingleResult();
+			    	
+			    	String tString = "SELECT t.day FROM Time t where t.id= '"+ n.getTimeid() + "'";
+			    	TypedQuery<String> t = em.createQuery(tString, String.class);
+			    	day= t.getSingleResult();
+			    	
+			    	String mString = "SELECT i.name FROM Instructor i where i.id='"+ n.getInstructorid()+ "'"; //add instructor to DB                                                                                                                                  
+			    	TypedQuery<String> m = em.createQuery(mString, String.class);
+			    	instructorID= m.getSingleResult();
+	
+					html += "<tr><td>" + n.getName()+" "+ n.getCoursenum()+ "</td>";
+					html += "<td>" + n.getSection() + "</td>";
+					html += "<td>" + n.getDescription() + "</td>";
+					html += "<td>" + n.getCredits()+ "</td>"; 
+					html += "<td>" + instructorID + "</td>";
+					html += "<td>" +  startTime + "-"+ endTime +"</td>";
+					html += "<td>" + day + "</td>";
+					html += "<td>" + n.getSubjectcode() + "</td>";
+					html += "<td><a href=\"DropCourse?dropID=" + c.getCourseid() + "&studID="+request.getSession().getAttribute("studID")+"\">" + "x</a>" + "</td></tr>";	
+				}
 				request.setAttribute("display", html);
-				getServletContext().getRequestDispatcher("/enrollstudent.jsp").forward(request, response);
+				getServletContext().getRequestDispatcher("/studentschedule.jsp").forward(request, response);
 			} 
 		
-		}
-    
-    	
+		}	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

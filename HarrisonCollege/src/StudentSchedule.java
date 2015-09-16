@@ -1,8 +1,6 @@
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -14,20 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Course;
 import model.DBUtil;
-import model.Time;
+import model.Enroll;
 import model.Util;
 
 /**
- * Servlet implementation class DisplayCourse
+ * Servlet implementation class StudentSchedule
  */
-@WebServlet("/DisplayCourse")
-public class DisplayCourse extends HttpServlet {
+@WebServlet("/StudentSchedule")
+public class StudentSchedule extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DisplayCourse() {
+    public StudentSchedule() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,32 +33,23 @@ public class DisplayCourse extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		Util.processUser(request);
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
-		String semester = request.getParameter("semester");
-		String depName = request.getParameter("depName");
-		String instructor = request.getParameter("instructor");
-		String major = request.getParameter("major");
-		String subject = request.getParameter("subject");
-		String time = request.getParameter("time");
-		String html="", startTime="", endTime=""; 
-		String timeID="", instructorID="", day="";
-		System.out.println(semester + " "+ depName + " "+ instructor + " "+ major + " "+ subject +" "+time);
-		//if(!semester.equalsIgnoreCase("Any")&& depName.equalsIgnoreCase("Any")&&instructor.equalsIgnoreCase("Any")&&major.equalsIgnoreCase("Any")&&subject.equalsIgnoreCase("Any")&&time.equalsIgnoreCase("Any"))
-		//{
-			List<Course> courses = DBUtil.getCourse("SELECT c FROM Course c where c.semester= '"+ semester +"'");
+		String html="", startTime="", endTime="", day="", instructorID="";
+		Long studID= (Long) request.getSession().getAttribute("studID");
+		if(DBUtil.get("SELECT e FROM Enroll e WHERE e.studid = " + studID).isEmpty())
+		{
+			html="You are not currently enrolled in any courses.";
+		}
+		else
+		{
 			
-			for (Object o : courses) {
-				Course n = (Course)o;
+			for (Object o : DBUtil.get("SELECT e FROM Enroll e WHERE e.studid = " + studID)) 
+			{
+				Enroll c = (Enroll)o;
+				Course n = (Course) DBUtil.get("SELECT c FROM Course c WHERE c.id = " + c.getCourseid()).get(0);
 				
 				String qString = "SELECT t.time FROM Time t where t.id= '"+ n.getTimeid() + "'";
 		    	TypedQuery<String> q = em.createQuery(qString, String.class);
@@ -77,7 +66,7 @@ public class DisplayCourse extends HttpServlet {
 		    	String mString = "SELECT i.name FROM Instructor i where i.id='"+ n.getInstructorid()+ "'"; //add instructor to DB                                                                                                                                  
 		    	TypedQuery<String> m = em.createQuery(mString, String.class);
 		    	instructorID= m.getSingleResult();
-
+	
 				html += "<tr><td>" + n.getName()+" "+ n.getCoursenum()+ "</td>";
 				html += "<td>" + n.getSection() + "</td>";
 				html += "<td>" + n.getDescription() + "</td>";
@@ -86,12 +75,18 @@ public class DisplayCourse extends HttpServlet {
 				html += "<td>" +  startTime + "-"+ endTime +"</td>";
 				html += "<td>" + day + "</td>";
 				html += "<td>" + n.getSubjectcode() + "</td>";
-				html += "<td><a href=\"EnrollStudent?enrollID=" + n.getId() + "&startTime="+startTime+ "&endTime="+endTime+"\">" + "Enroll</a>" + "</td></tr>";
-			} 
-		
-		//get rest from Ankushi
+				html += "<td><a href=\"DropCourse?dropID=" + c.getCourseid() + "&studID="+request.getSession().getAttribute("studID")+"\">" + "x</a>" + "</td></tr>";	
+			}
+		}
 		request.setAttribute("display", html);
-		getServletContext().getRequestDispatcher("/displaycourse.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/studentschedule.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 	}
 
 }
