@@ -45,6 +45,7 @@ public class EnrollStudent extends HttpServlet {
 		String endTime = request.getParameter("endTime");
 		String currSTART="",currEND="";
 		Integer sID= (int) (long)studID;
+		int overlap=0;
 		
 		long start= Long.parseLong(startTime.substring(0,2)+startTime.substring(3));
 		long end= Long.parseLong(endTime.substring(0,2)+endTime.substring(3));
@@ -79,23 +80,23 @@ public class EnrollStudent extends HttpServlet {
 		    	currEND= s.getSingleResult();
 		    	long currEnd= Long.parseLong(currEND.substring(0,2)+currEND.substring(3));
 		    	
-		    	
+		    	System.out.println("start "+ start + " currentEnd "+ currEnd + " currStart " + currStart + " end" + end);
 		    	if(start<=currEnd && currStart<=end)
 				{
+		    		overlap+= 1;
 		    		System.out.println("Courses Overlap");
-					return "Courses Overlap";
+					return "Courses Overlap";	
 				}
-		    	else
-		    	{
+			}	
+			if(overlap==0)
+			{
 		    		Enroll u= new Enroll(sID, Integer.parseInt(courseID), "U");
 					DBUtil.insert(u);
 		    		System.out.println("Course Enrolled");
 		    		return "Course Enrolled";
-		    	}
-		    	
-			}	
+			}
 		}
-		return "out";
+		return "false";
 	}
 	
 	
@@ -104,9 +105,50 @@ public class EnrollStudent extends HttpServlet {
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
 		String output= test(request);
 		System.out.println("Output: "+ output);
-		request.setAttribute("display", output);
-		getServletContext().getRequestDispatcher("/enrollstudent.jsp").forward(request, response);
-	
+		
+		String html="", startTime="", endTime="", day="", instructorID="";
+		if(output.equalsIgnoreCase("Courses Overlap"))
+		{
+			request.setAttribute("display", "The class you are trying to enroll in overlaps with your schedule.");
+			getServletContext().getRequestDispatcher("/enrollstudent.jsp").forward(request, response);
+		}
+		else
+			if(output.equalsIgnoreCase("Course Enrolled"))
+			{
+				String courseID = request.getParameter("enrollID");
+				Course n = (Course) DBUtil.get("SELECT c FROM Course c WHERE c.id = " + courseID).get(0);
+				
+				String qString = "SELECT t.time FROM Time t where t.id= '"+ n.getTimeid() + "'";
+		    	TypedQuery<String> q = em.createQuery(qString, String.class);
+		    	startTime= q.getSingleResult();
+		    	
+		    	String sString = "SELECT t.duration FROM Time t where t.id= '"+ n.getTimeid() + "'";
+		    	TypedQuery<String> s = em.createQuery(sString, String.class);
+		    	endTime= s.getSingleResult();
+		    	
+		    	String tString = "SELECT t.day FROM Time t where t.id= '"+ n.getTimeid() + "'";
+		    	TypedQuery<String> t = em.createQuery(tString, String.class);
+		    	day= t.getSingleResult();
+		    	
+		    	String mString = "SELECT i.name FROM Instructor i where i.id='"+ n.getInstructorid()+ "'"; //add instructor to DB                                                                                                                                  
+		    	TypedQuery<String> m = em.createQuery(mString, String.class);
+		    	instructorID= m.getSingleResult();
+
+				html += "<tr><td>" + n.getName()+" "+ n.getCoursenum()+ "</td>";
+				html += "<td>" + n.getSection() + "</td>";
+				html += "<td>" + n.getDescription() + "</td>";
+				html += "<td>" + n.getCredits()+ "</td>"; 
+				html += "<td>" + instructorID + "</td>";
+				html += "<td>" +  startTime + "-"+ endTime +"</td>";
+				html += "<td>" + day + "</td>";
+				html += "<td>" + n.getSubjectcode() + "</td>";
+				html += "<td><a href=\"EnrollStudent?enrollID=" + n.getId() + "&startTime="+startTime+ "&endTime="+endTime+"\">" + "Enroll</a>" + "</td></tr>";
+				
+				request.setAttribute("outcome", "Course Successfully Enrolled!");
+				request.setAttribute("display", html);
+				getServletContext().getRequestDispatcher("/enrollstudent.jsp").forward(request, response);
+			} 
+		
 		}
     
     	
