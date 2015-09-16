@@ -15,6 +15,7 @@ public class Admin extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);
+		Util.processUser(request);
 		getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
 	}
 
