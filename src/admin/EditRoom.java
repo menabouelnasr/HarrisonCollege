@@ -35,8 +35,8 @@ public class EditRoom extends HttpServlet {
 			DBUtil.update(c);
 		}
 		
-		request.setAttribute("feedback", Util.successAlert("Course Updated!"));
-		getServletContext().getRequestDispatcher("/admin/editRoom.jsp").forward(request, response);
+		request.setAttribute("feedback", Util.successAlert("Classroom Updated!"));
+		getServletContext().getRequestDispatcher("/Admin").forward(request, response);
 	}
 	
 }

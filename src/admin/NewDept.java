@@ -26,8 +26,8 @@ public class NewDept extends HttpServlet {
 		d.setName(name);
 		DBUtil.insert(d);
 		
-		request.setAttribute("feedback", Util.successAlert("Course Updated!"));
-		getServletContext().getRequestDispatcher("/admin/newDept.jsp").forward(request, response);
+		request.setAttribute("feedback", Util.successAlert("Department Added!"));
+		getServletContext().getRequestDispatcher("/Admin").forward(request, response);
 	}
 	
 }

@@ -33,8 +33,8 @@ public class EditMajor extends HttpServlet {
 			DBUtil.update(d);
 		}
 		
-		request.setAttribute("feedback", Util.successAlert("Course Updated!"));
-		getServletContext().getRequestDispatcher("/admin/editMajor.jsp").forward(request, response);
+		request.setAttribute("feedback", Util.successAlert("Major Updated!"));
+		getServletContext().getRequestDispatcher("/Admin").forward(request, response);
 	}
 	
 }

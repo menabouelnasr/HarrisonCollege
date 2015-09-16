@@ -31,8 +31,8 @@ public class EditDept extends HttpServlet {
 			DBUtil.update(d);
 		}
 		
-		request.setAttribute("feedback", Util.successAlert("Course Updated!"));
-		getServletContext().getRequestDispatcher("/admin/editDept.jsp").forward(request, response);
+		request.setAttribute("feedback", Util.successAlert("Department Updated!"));
+		getServletContext().getRequestDispatcher("/Admin").forward(request, response);
 	}
 	
 }

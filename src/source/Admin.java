@@ -82,7 +82,6 @@ public class Admin extends HttpServlet {
 		return html;
 	}
 	
-	
 	private String listDepts(HttpServletRequest request) {
 		String html = "";
 		for (Object o : DBUtil.get("SELECT DISTINCT d.name FROM Department d")) {
@@ -133,7 +132,9 @@ public class Admin extends HttpServlet {
 		System.out.println(userID);
 		System.out.println(userType);
 		
-		if (userID == null || userID.equals("")) { 
+		if (userID == null) { return; }
+		
+		if (userID.equals("")) { 
 			request.setAttribute("feedback", Util.failAlert("Invalid Input"));
 			return; 
 		}

@@ -43,11 +43,13 @@ public class NewCourse extends HttpServlet {
 		c.setName(name);
 		c.setDescription(desc);
 		c.setCredits(credits);
-		c.setSemester(semester);			
+		c.setSemester(semester);	
+		System.out.println("ID OF COURSE BEING ADDED: " + c.getId());
 		DBUtil.insert(c);
+		System.out.println("ID OF COURSE ADDED: " + c.getId());
 		
-		request.setAttribute("feedback", Util.successAlert("Course Updated!"));
-		getServletContext().getRequestDispatcher("/admin/newCourse.jsp").forward(request, response);
+		request.setAttribute("feedback", Util.successAlert("Course Added!"));
+		getServletContext().getRequestDispatcher("/Admin").forward(request, response);
 	}
 	
 }

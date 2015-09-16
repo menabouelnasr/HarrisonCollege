@@ -68,7 +68,7 @@ public class EditCourse extends HttpServlet {
 		}
 			
 		request.setAttribute("feedback", Util.successAlert("Course Updated!"));
-		getServletContext().getRequestDispatcher("/admin/editCourse.jsp").forward(request, response);
+		getServletContext().getRequestDispatcher("/Admin").forward(request, response);
 	}
 	
 }

@@ -28,8 +28,8 @@ public class NewRoom extends HttpServlet {
 		c.setRoomnum(roomnum);
 		DBUtil.insert(c);
 		
-		request.setAttribute("feedback", Util.successAlert("Course Updated!"));
-		getServletContext().getRequestDispatcher("/admin/newRoom.jsp").forward(request, response);
+		request.setAttribute("feedback", Util.successAlert("Classroom Added!"));
+		getServletContext().getRequestDispatcher("/Admin").forward(request, response);
 	}
 	
 }
