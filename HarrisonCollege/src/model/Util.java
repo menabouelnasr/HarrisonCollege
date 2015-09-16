@@ -58,7 +58,7 @@ public class Util {
         "<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> " + userName + "'s Profile<span class=\"caret\"></span></a>" +
 	    "<ul class=\"dropdown-menu\">" + 
         "<li><a href=\"StudentSchedule\">My Schedule</a></li>" + 
-        "<li><a href=\"purchased\">My Transcript</a></li>" + 
+        "<li><a href=\"Transcript\">My Transcript</a></li>" + 
 	    "<li><a href=\"CourseList\">Course Lookup</a></li>" + 
 	    "</ul></li>";
         

@@ -17,13 +17,10 @@
 </nav>
 
 	<div class="container">	
-		<form role="form" method="post" action="StudentSchedule">
-			<div class="form-group">
-				<input type="text" class="form-control" name="search" placeholder="Search"> <!-- autofocus -->
-			</div>
-		</form>
+	${feedback}
+	
 	 	<h2>My Schedule</h2>
-	 	${outcome}
+	 	
 		<table class="table table-hover table-condensed"> <!-- style="width: 500px; position: absolute; left: 80px; top: 150px;" -->
 			<thead>
 			<tr>

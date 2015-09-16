@@ -16,11 +16,7 @@
   </div>
 </nav>
 
-	<div class="container">	
-		<form role="form" method="post" action="StudentSchedule">
-			<div class="form-group">
-				<input type="text" class="form-control" name="search" placeholder="Search"> <!-- autofocus -->
-			</div>
+	<div class="container">	</div>
 		</form>
 		${outcome}
 	 	<h2>Enrolled Courses</h2>

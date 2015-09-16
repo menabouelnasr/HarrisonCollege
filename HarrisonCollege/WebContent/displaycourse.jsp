@@ -17,12 +17,8 @@
 </nav>
 
 	<div class="container">	
-		<form role="form" method="post" action="DisplayCourse">
-			<div class="form-group">
-				<input type="text" class="form-control" name="search" placeholder="Search"> <!-- autofocus -->
-			</div>
-		</form>
-	 	<h2>Avaliable Course</h2>
+	${feedback}
+	 	<h2>Available Courses</h2>
 		<table class="table table-hover table-condensed"> <!-- style="width: 500px; position: absolute; left: 80px; top: 150px;" -->
 			<thead>
 			<tr>

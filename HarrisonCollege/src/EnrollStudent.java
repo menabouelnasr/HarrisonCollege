@@ -85,8 +85,8 @@ public class EnrollStudent extends HttpServlet {
 		    	if(start<=currEnd && currStart<=end)
 				{
 		    		overlap+= 1;
-		    		System.out.println("Courses Overlap");
-					return "Courses Overlap";	
+		    		System.out.println("Course Overlap");
+					return "Course Overlap";	
 				}
 			}	
 			if(overlap==0)
@@ -110,10 +110,10 @@ public class EnrollStudent extends HttpServlet {
 		Long studID= (Long) request.getSession().getAttribute("studID");
 		
 		String html="", startTime="", endTime="", day="", instructorID="";
-		if(output.equalsIgnoreCase("Courses Overlap"))
+		if(output.equalsIgnoreCase("Course Overlap"))
 		{
-			request.setAttribute("display", "The class you are trying to enroll in overlaps with your schedule.");
-			getServletContext().getRequestDispatcher("/enrollstudent.jsp").forward(request, response);
+			request.setAttribute("feedback", Util.failAlert("The class you are trying to enroll in overlaps with your schedule."));
+			getServletContext().getRequestDispatcher("/studentschedule.jsp").forward(request, response);
 		}
 		else
 			if(output.equalsIgnoreCase("Course Enrolled") ||output.equalsIgnoreCase("first entry") )
@@ -149,6 +149,7 @@ public class EnrollStudent extends HttpServlet {
 					html += "<td>" + n.getSubjectcode() + "</td>";
 					html += "<td><a href=\"DropCourse?dropID=" + c.getCourseid() + "&studID="+request.getSession().getAttribute("studID")+"\">" + "x</a>" + "</td></tr>";	
 				}
+				request.setAttribute("feedback", Util.successAlert("Course Enrolled"));
 				request.setAttribute("display", html);
 				getServletContext().getRequestDispatcher("/studentschedule.jsp").forward(request, response);
 			} 

@@ -58,6 +58,7 @@ public class CourseList extends HttpServlet
 		
 		List<Department> department = DBUtil.getDepartment("SELECT d FROM Department d");
 		List<String> depName=new ArrayList<String>();
+		List<Long> depID=new ArrayList<Long>();
 		List<String> major=new ArrayList<String>();
 		for (int i=0; i<department.size();i++)
 		{
@@ -82,6 +83,7 @@ public class CourseList extends HttpServlet
 		String[] time = {"MWF", "TTH"};
 		request.setAttribute("semesters", semesters);
 		request.setAttribute("depName", depName);
+		request.setAttribute("depID", depID);
 		request.setAttribute("subject", subject);
 		request.setAttribute("major", major);
 		request.setAttribute("instructor", instructor);
