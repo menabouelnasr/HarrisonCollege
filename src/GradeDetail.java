@@ -58,6 +58,12 @@ public class GradeDetail extends HttpServlet {
 		grades += "<div><table class='table table-bordered table-striped'>";
 		grades += "<thead>";
 		grades += "<th>";
+		grades += "Subject Code";
+		grades += "</th>";
+		grades += "<th>";
+		grades += "Course Number";
+		grades += "</th>";
+		grades += "<th>";
 		grades += "Course Name";
 		grades += "</th>";
 		grades += "<th>";
@@ -74,6 +80,12 @@ public class GradeDetail extends HttpServlet {
 		grades += "<tbody>";
 		for(Course c : cs){
 			grades += "<tr>"
+			+"<td>"
+			+c.getSubjectcode()
+			+"</td>"
+			+"<td>"
+			+c.getCoursenum()
+			+"</td>"
 			+"<td>"
 			+c.getName()
 			+"</td>"

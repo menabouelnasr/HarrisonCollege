@@ -15,47 +15,53 @@ import customTools.DBUtil;
  */
 @WebServlet("/AddDropCourse")
 public class AddDropCourse extends HttpServlet {
-	private static final long serialVersionUID = 1L;       
+	private static final long serialVersionUID = 1L;     
+	private String adddrop;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AddDropCourse() {
         super();
+        adddrop="";
         // TODO Auto-generated constructor stub
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String message="";
-		EntityManager em= DBUtil.getEmFactory().createEntityManager();
+		doPost(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String adddrop="";
+		EntityManager em= DBUtil.getEmFactory().createEntityManager();	
 		try{
 			List <model.Student> student = StudentDB.selectstudent();
-			message += "<div class=\"container\">";
-			message += "<table class=\"table table=bordered\"><thead><th>Student Name</th><th>Major</th></thead><tbody>";
+			adddrop += "<div class=\"container\">";
+			adddrop += "<table class=\"table table=bordered\"><thead><th>Student Name</th><th>Major</th></thead><tbody>";
 			for(model.Student s: student) {
 				
-				message += "<tr>";
-				message += "<td><a href=\"GradeDetail?Id="+s.getId()+"\">"
+				adddrop += "<tr>";
+				adddrop += "<td><a href=\"DisplayCourse?Id="+s.getId()+"\">"
 						+ s.getName()+"</td><td>"+ s.getMajor() +"</td>";
-				message += "</tr>";	
+				adddrop += "</tr>";	
 			}
-				message += "</tbody></table>";
-				message += "</div>";
 			
-			request.setAttribute("message",message);
-			getServletContext().getRequestDispatcher("/transcript.jsp").forward(request, response);
+				adddrop += "</tbody></table>";
+				adddrop += "</div>";
+			
+			request.setAttribute("adddrop",adddrop);
+			getServletContext().getRequestDispatcher("/CurrentCourse.jsp").forward(request, response);
+
 		}catch (Exception e){
 			e.printStackTrace();
 		}finally{
 			em.close();}
 		}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 	}
 	
-	}
+	
