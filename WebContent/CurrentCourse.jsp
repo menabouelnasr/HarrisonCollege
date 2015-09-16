@@ -9,5 +9,6 @@
 <body>
 ${adddrop}
 ${currentg}
+
 </body>
 </html>

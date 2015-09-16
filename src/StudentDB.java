@@ -7,6 +7,8 @@ import javax.persistence.TypedQuery;
 
 import model.Course;
 import model.Enroll;
+import model.Student;
+import model.Course;
 import customTools.DBUtil;
 
 public class StudentDB {
@@ -26,9 +28,9 @@ public class StudentDB {
 		public static List<model.Student> selectstudent(){
 			EntityManager em= DBUtil.getEmFactory().createEntityManager();
 			String query="SELECT s FROM Student s";
-			TypedQuery<model.Student> q = em.createQuery(query, model.Student.class);
+			TypedQuery<Student> q = em.createQuery(query, Student.class);
 			try{
-				List<model.Student> students = q.getResultList();
+				List<Student> students = q.getResultList();
 				return students;
 			} catch (Exception e){
 				e.printStackTrace();
@@ -54,7 +56,7 @@ public class StudentDB {
 			}	
 		}
 		
-		public static Course getCourseByID(int id){
+		public static Course getCourseByID(long id){
 			EntityManager em= DBUtil.getEmFactory().createEntityManager();
 			String query="SELECT s FROM Course s where s.id =" + id;
 			System.out.println(query);
@@ -102,7 +104,7 @@ public class StudentDB {
 	}		
 		public static List<Course> selectcoursebyid(int id){
 			EntityManager em= DBUtil.getEmFactory().createEntityManager();
-			String query="SELECT s FROM Course s";
+			String query="SELECT s FROM Course s where s.id="+id;
 			TypedQuery<Course> q = em.createQuery(query, Course.class);
 			try{
 				List<Course> course = q.getResultList();
@@ -117,6 +119,7 @@ public class StudentDB {
 			public static List<Enroll> selectbycurrent(){
 				EntityManager em= DBUtil.getEmFactory().createEntityManager();
 				String query="SELECT s FROM Enroll s where s.grade="+"'N/A'";
+				System.out.println(query);
 				TypedQuery<Enroll> q = em.createQuery(query, model.Enroll.class);
 				try{
 					List<Enroll> students = q.getResultList();
@@ -128,5 +131,37 @@ public class StudentDB {
 					em.close();
 				}
 		}
+			
+			public static List<Enroll> selectbycurrentbyid(int sid){
+				EntityManager em= DBUtil.getEmFactory().createEntityManager();
+				String query="SELECT s FROM Enroll s where s.grade = 'N/A' and s.studid = " + sid;
+				System.out.println(query);
+				TypedQuery<Enroll> q = em.createQuery(query, Enroll.class);
+				try{
+					List<Enroll> students = q.getResultList();
+					return students;
+				} catch (Exception e){
+					e.printStackTrace();
+					return null;
+				}finally{
+					em.close();
+				}
+		}
+			
+			
+			public static void delete(Object o) {
+				EntityManager em = DBUtil.getEmFactory().createEntityManager();
+				EntityTransaction trans = em.getTransaction();
+				trans.begin();
+				try {
+					em.remove(em.merge(o));
+					trans.commit();
+				} catch (Exception e) {
+					System.out.println(e);
+					trans.rollback();
+				} finally {
+					em.close();
+				}
+			}	
 		
 	}

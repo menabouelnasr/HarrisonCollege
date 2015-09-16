@@ -8,6 +8,6 @@
 </head>
 <body>
 ${grades}
-${message }
+${message}
 </body>
 </html>

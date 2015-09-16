@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.Course;
 import model.Enroll;
+import model.Student;
 
 /**
  * Servlet implementation class CourseD
@@ -76,7 +77,7 @@ public class CourseD extends HttpServlet {
 		currentg += "</table>";
 		currentg += "</div>";
 		request.setAttribute("currentg",currentg);
-		getServletContext().getRequestDispatcher("/CurrentCourse.jsp").forward(request,response);
+		getServletContext().getRequestDispatcher("DisplayCourse").forward(request,response);
 	}
 			
 

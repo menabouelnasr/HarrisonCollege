@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Course;
+import model.Enroll;
+import model.Student;
 import customTools.DBUtil;
 
 /**
@@ -29,23 +32,16 @@ public class AddDropCourse extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String adddrop="";
 		EntityManager em= DBUtil.getEmFactory().createEntityManager();	
 		try{
-			List <model.Student> student = StudentDB.selectstudent();
+			List <Student> student = StudentDB.selectstudent();
 			adddrop += "<div class=\"container\">";
 			adddrop += "<table class=\"table table=bordered\"><thead><th>Student Name</th><th>Major</th></thead><tbody>";
-			for(model.Student s: student) {
+			for(Student s: student) {
 				
 				adddrop += "<tr>";
-				adddrop += "<td><a href=\"DisplayCourse?Id="+s.getId()+"\">"
+				adddrop += "<td><a href=\"DisplayCourse?Idd=" + s.getId()+"\">"
 						+ s.getName()+"</td><td>"+ s.getMajor() +"</td>";
 				adddrop += "</tr>";	
 			}
@@ -60,8 +56,48 @@ public class AddDropCourse extends HttpServlet {
 			e.printStackTrace();
 		}finally{
 			em.close();}
-		}
-
 	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		
+	}	
 	
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	String currentc="";
+	EntityManager em= DBUtil.getEmFactory().createEntityManager();		
+	try{
+	List<Enroll> currentcourse = StudentDB.selectbycurrent();
+	System.out.println(currentcourse);
+	currentc += "<div class=\"container\">";
+	currentc += "<table class=\"table table=bordered\"><thead><th>Student Name</th><th>Credit</th></thead><tbody>";
+	for(model.Enroll enroll: currentcourse) {
+		List<Course> course_list = StudentDB.selectcoursebyid((int)enroll.getCourseid());
+		
+		for(Course c : course_list){
+			System.out.println(c.getId());
+			currentc += "<tr>" 
+					 + "<td><a href= " + "\'" + "CourseD?courseId="+ c.getId()+ "\">" +c.getName()+"</a>"+c.getCredits()+"<tr>"+"</td>";
+			currentc += "</tr>";		
+		
+		}			
+//		currentc += "<tr>";
+//		currentc += "<td><a href=\"CourseDetail?Id="+c.getId()+"\">" +c.getClass()+"</td><td>"+ c.getGrade()="N/A"+"</td>";
+//		currentc += "</tr>";	
 	
+		currentc += "</tbody></table>";
+		currentc += "</div>";
+		request.setAttribute("currentc",currentc);
+		getServletContext().getRequestDispatcher("/CurrentCourse.jsp").forward(request, response);
+
+	}}catch (Exception e){
+		e.printStackTrace();
+	}finally{
+		em.close();}
+	}	
+	
+	}
+		
