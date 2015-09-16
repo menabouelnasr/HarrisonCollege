@@ -64,11 +64,11 @@ public class viewStudent extends HttpServlet {
 				+ "</tr>"
 				;
 		
-		List<Student> students;
+		System.out.println("enrolls    " + enroll_list.size());
 		for(Enroll enroll : enroll_list){
 			
-			students = DBUtil.getStudent("select s from Student s where s.id=" + enroll.getStudid());
-		
+			List<Student> students = DBUtil.getStudent("select s from Student s where s.id=" + enroll.getStudid());
+				System.out.println("students   " + students.size());
 				for(Student stud : students){
 					
 						line += "<tr>" 
@@ -78,9 +78,9 @@ public class viewStudent extends HttpServlet {
 							 + "<td>" + stud.getEntryyear() + "</td>"
 							 + "<td>" + stud.getGradyear() + "</td>"
 							 + "<td>" +				 
-							 "<a  href= " + "\'" + "#" + "\'" + "onclick='showDiv()' " + ">"+  enroll.getGrade() + "</a>" + "</td>"
+							 "<a  href= " + "\'" + "#" + "\'" + "onclick='showDiv(" + stud.getId() +")' " + ">"+  enroll.getGrade() + "</a>" + "</td>"
 							 +"<td>"
-							 +"<form class='form-inline' action='viewStudent' method='post' style='display:none;' id='editbox'"
+							 +"<form class='form-inline' action='viewStudent' method='post' style='display:none;' id=" +stud.getId()
 							 +">"
 						  	 + "<input type='text' class='form-control input-sm' placeholder='Add Grade' name='newgrade'>"
 							 + "<input type='hidden' name='studID' value="+ stud.getId() + ">"
@@ -103,6 +103,7 @@ public class viewStudent extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		System.out.println(request.getParameter("studID"));
 		int studID = Integer.valueOf(request.getParameter("studID"));
 		String newgrade = request.getParameter("newgrade");
 		int courseID = Integer.valueOf(request.getParameter("courseID"));
