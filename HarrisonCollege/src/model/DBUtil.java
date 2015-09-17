@@ -29,6 +29,9 @@ public class DBUtil {
 	public static java.util.List<Time> getTime(String qString) {
 		return emf.createEntityManager().createQuery(qString, Time.class).getResultList();
 	}
+	public static java.util.List<Classroom> getRoom(String qString) {
+		return emf.createEntityManager().createQuery(qString, Classroom.class).getResultList();
+	}
 	public static void insert(Object o) {
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
 		EntityTransaction trans = em.getTransaction();

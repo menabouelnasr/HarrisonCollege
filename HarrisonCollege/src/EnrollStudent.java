@@ -103,18 +103,24 @@ public class EnrollStudent extends HttpServlet {
 	//finish max capacity 
     private String checkCapacity(HttpServletRequest request) 
     {
+    	EntityManager em = DBUtil.getEmFactory().createEntityManager();
     	Long studID= (Long) request.getSession().getAttribute("studID");
     	String courseID = request.getParameter("enrollID");
-    
+    	List<String> enrolledStudents;
+   
     	int maxCap=0,student=0;
-    	for (Object o : DBUtil.get("SELECT e FROM Enroll e WHERE e.courseid = " + courseID )) //gets all enrolled students for a course
-		{
-    		Course c = (Course)o;
-    		Classroom room = (Classroom) DBUtil.get("SELECT c FROM Classroom c WHERE c.id = " + c.getRoomid());
-    		maxCap= Integer.parseInt(room.getMaxcap());
-    		student++;
-		}
-    	if(student-maxCap>0)
+    	
+    	String qString = "SELECT e FROM Enroll e WHERE e.courseid = " + courseID;
+    	TypedQuery<String> q = em.createQuery(qString, String.class);
+    	enrolledStudents= q.getResultList();
+    	student=enrolledStudents.size();
+    	System.out.println("Num of studs "+student);
+    	List<Course> course= DBUtil.getCourse("SELECT c FROM Course c WHERE c.id = " + courseID);
+    	System.out.println("Course Size: "+course.size());
+    	List<Classroom> room =DBUtil.getRoom("SELECT c FROM Classroom c WHERE c.id = " + course.get(0).getRoomid());
+    	maxCap= Integer.parseInt(room.get(0).getMaxcap());
+    	System.out.println("Max Cap: "+maxCap);
+    	if(maxCap-student>0)
     	{
     		return "true";
     	}
@@ -126,6 +132,7 @@ public class EnrollStudent extends HttpServlet {
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
 		String output= checkEnrollment(request); //checks enrollment
 		String capacity= checkCapacity(request); //checks capacity
+		System.out.println("Check capacity: "+ capacity);
 		System.out.println("Output: "+ output);
 		Long studID= (Long) request.getSession().getAttribute("studID");
 		
