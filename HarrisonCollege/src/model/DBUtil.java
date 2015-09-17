@@ -14,6 +14,9 @@ public class DBUtil {
 	public static java.util.List<Course> getCourse(String qString) {
 		return emf.createEntityManager().createQuery(qString, Course.class).getResultList();
 	}
+	public static java.util.List<Student> getStudent(String qString) {
+		return emf.createEntityManager().createQuery(qString, Student.class).getResultList();
+	}
 	public static java.util.List<Object> get(String qString) {
 		return emf.createEntityManager().createQuery(qString, Object.class).getResultList();
 	}

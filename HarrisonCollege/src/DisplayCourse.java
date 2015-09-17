@@ -67,7 +67,7 @@ public class DisplayCourse extends HttpServlet {
 		
 		//System.out.println(time);
 		
-		String query = "SELECT c FROM Course c WHERE 1=1";
+		String query = "SELECT c FROM Course c WHERE 1=1 and c.enabled=1";
 		
 		if (!semester.equalsIgnoreCase("any")) {
 			query += " AND c.semester = '" + semester + "\'";
@@ -121,55 +121,64 @@ public class DisplayCourse extends HttpServlet {
 		{
 			request.setAttribute("feedback", Util.failAlert("No courses are available for the entries you have selected."));
 		}
-		for (Object o : courses) {
-			Course n = (Course)o;
-			
-			String qString = "SELECT t.time FROM Time t where t.id= '"+ n.getTimeid() + "'";
-	    	TypedQuery<String> q = em.createQuery(qString, String.class);
-	    	startTime= q.getSingleResult();
-	    	
-	    	if(Integer.parseInt(startTime.substring(0,2)+ startTime.substring(3))>1200)
-	    	{
-	    		newStart= Integer.parseInt(startTime.substring(0,2)+ startTime.substring(3))-1200;
-	    		finStart= Integer.toString(newStart)+ " pm";
-	    	}
-	    	else
-	    	{
-	    		finStart= startTime+ " am";
-	    	}
-	    	
-	    	String sString = "SELECT t.duration FROM Time t where t.id= '"+ n.getTimeid() + "'";
-	    	TypedQuery<String> s = em.createQuery(sString, String.class);
-	    	endTime= s.getSingleResult();
-	    	
-	    	if(Integer.parseInt(endTime.substring(0,2)+ endTime.substring(3))>1200)
-	    	{
-	    		newEnd= Integer.parseInt(endTime.substring(0,2)+ endTime.substring(3))-1200;
-	    		finEnd= Integer.toString(newEnd)+ " pm";
-	    	}
-	    	else
-	    	{
-	    		finEnd= endTime+ " am";
-	    	}
-	    	
-	    	String tString = "SELECT t.day FROM Time t where t.id= '"+ n.getTimeid() + "'";
-	    	TypedQuery<String> t = em.createQuery(tString, String.class);
-	    	day= t.getSingleResult();
-	    	
-	    	String mString = "SELECT i.name FROM Instructor i where i.id='"+ n.getInstructorid()+ "'"; //add instructor to DB                                                                                                                                  
-	    	TypedQuery<String> m = em.createQuery(mString, String.class);
-	    	instructorID= m.getSingleResult();
+		else
+		{
+		
+			for (Object o : courses) 
+			{
+				Course n = (Course)o;
+				
+				String qString = "SELECT t.time FROM Time t where t.id= '"+ n.getTimeid() + "'";
+		    	TypedQuery<String> q = em.createQuery(qString, String.class);
+		    	startTime= q.getSingleResult();
+		    	
+		    	if(Integer.parseInt(startTime.substring(0,2)+ startTime.substring(3))>1200)
+		    	{
+		    		newStart= Integer.parseInt(startTime.substring(0,2)+ startTime.substring(3))-1200;
+		    		finStart= Integer.toString(newStart)+ " pm";
+		    	}
+		    	else
+		    	{
+		    		finStart= startTime+ " am";
+		    	}
+		    	
+		    	String sString = "SELECT t.duration FROM Time t where t.id= '"+ n.getTimeid() + "'";
+		    	TypedQuery<String> s = em.createQuery(sString, String.class);
+		    	endTime= s.getSingleResult();
+		    	
+		    	if(Integer.parseInt(endTime.substring(0,2)+ endTime.substring(3))>1200)
+		    	{
+		    		newEnd= Integer.parseInt(endTime.substring(0,2)+ endTime.substring(3))-1200;
+		    		finEnd= Integer.toString(newEnd)+ " pm";
+		    	}
+		    	else
+		    	{
+		    		finEnd= endTime+ " am";
+		    	}
+		    	
+		    	String tString = "SELECT t.day FROM Time t where t.id= '"+ n.getTimeid() + "'";
+		    	TypedQuery<String> t = em.createQuery(tString, String.class);
+		    	day= t.getSingleResult();
 
-			html += "<tr><td>" + n.getName()+" "+ n.getCoursenum()+ "</td>";
-			html += "<td>" + n.getSection() + "</td>";
-			html += "<td>" + n.getDescription() + "</td>";
-			html += "<td>" + n.getCredits()+ "</td>"; 
-			html += "<td>" + instructorID + "</td>";
-			html += "<td>" +  finStart + "-"+ finEnd +"</td>";
-			html += "<td>" + day + "</td>";
-			html += "<td>" + n.getSubjectcode() + "</td>";
-			html += "<td><a href=\"EnrollStudent?enrollID=" + n.getId() + "&startTime="+startTime+ "&endTime="+endTime+"\">" + "Enroll</a>" + "</td></tr>";
-		} 
+		    	String mString = "SELECT i.name FROM Instructor i where i.id='"+ n.getInstructorid()+ "'"; //add instructor to DB                                                                                                                                  
+		    	TypedQuery<String> m = em.createQuery(mString, String.class);
+		    	instructorID= m.getResultList().get(0);
+	
+				html += "<tr><td>" + n.getName()+" "+ n.getCoursenum()+ "</td>";
+				html += "<td>" + n.getSection() + "</td>";
+				html += "<td>" + n.getDescription() + "</td>";
+				html += "<td>" + n.getCredits()+ "</td>"; 
+				html += "<td>" + instructorID + "</td>";
+				html += "<td>" +  finStart + "-"+ finEnd +"</td>";
+				html += "<td>" + day + "</td>";
+				html += "<td>" + n.getSubjectcode() + "</td>";
+				
+				if(request.getSession().getAttribute("insID")==null)
+				{
+					html += "<td><a href=\"EnrollStudent?enrollID=" + n.getId() + "&startTime="+startTime+ "&endTime="+endTime+"\">" + "Enroll</a>" + "</td></tr>";
+				}
+			} 
+		}
 		if(output>0)
 		{
 			request.setAttribute("feedback", Util.failAlert("One or more of your entries yielded invalid results. Search has been completed with available results."));

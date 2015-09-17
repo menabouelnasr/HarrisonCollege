@@ -49,7 +49,7 @@ public class StudentSchedule extends HttpServlet {
 		else
 		{
 			
-			for (Object o : DBUtil.get("SELECT e FROM Enroll e WHERE e.studid = " + studID)) 
+			for (Object o : DBUtil.get("SELECT e FROM Enroll e WHERE e.studid = " + studID +" and e.grade= 'U'")) 
 			{
 				Enroll c = (Enroll)o;
 				Course n = (Course) DBUtil.get("SELECT c FROM Course c WHERE c.id = " + c.getCourseid()).get(0);

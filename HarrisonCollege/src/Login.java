@@ -79,6 +79,10 @@ public class Login extends HttpServlet {
 		    	{
 		    		request.getSession().setAttribute("studID", id);
 		    	}
+		    	if(studType.equalsIgnoreCase("Instructor"))
+		    	{
+		    		request.getSession().setAttribute("insID", id);
+		    	}
 			}
 		}
 		

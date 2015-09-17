@@ -22,6 +22,7 @@ public class Util {
 	
 	public static String checkLogin(HttpServletRequest request, boolean here) {
 		Long userID = (Long) request.getSession().getAttribute("userID");
+
 		if (userID == null || userID == -1) {
 			return loginButtons;
 		} else {
@@ -29,7 +30,14 @@ public class Util {
 			String qString = "SELECT u FROM Usr u WHERE u.id = " + userID;
 			List<Usr> users = em.createQuery(qString, Usr.class).getResultList();
 			for (Usr u : users) {
-				return formatSignOutButtons(u.getId(), u.getUsername(), here, isAdmin(userID));
+				if(u.getType().equalsIgnoreCase("student"))
+				{
+					return formatSignOutButtons(u.getId(), u.getUsername(), here, isAdmin(userID));
+				}
+				else if(u.getType().equalsIgnoreCase("instructor"))
+				{
+					return formatInstructorButtons(u.getId(), u.getUsername(), here, isAdmin(userID));
+				}
 			}
 			return loginButtons;
 		}
@@ -67,6 +75,27 @@ public class Util {
 		return admin + acc + logOut;
 	}
 	
+	private static String formatInstructorButtons(long userID, String userName, boolean here, boolean isAdmin) {
+		String select = "";
+		if (here) {
+			select = " class=\"active\"";
+		}
+		String admin  = "<li><a href=\"admin\"><span class=\"glyphicon glyphicon-cog\"></span> Admin</a></li>";
+        //String acc    = "<li" + select + "><a href=\"CartProcess?userID=" + userID + "\"><span class=\"glyphicon glyphicon-user\"></span> " + userName + "'s Cart</a></li>";
+       
+        
+        String acc = "<li class=\"dropdown\">" + 
+        "<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> " + (userName.substring(0,1).toUpperCase()+ userName.substring(1)) + "'s Profile<span class=\"caret\"></span></a>" +
+	    "<ul class=\"dropdown-menu\">" + 
+        "<li><a href=\"InstructHome\">My Class History</a></li>" + 
+	    "<li><a href=\"CourseList\">Course Lookup</a></li>" + 
+	    "</ul></li>";
+        
+        String logOut = "<li><a href=\"login?logout=true\"><span class=\"glyphicon glyphicon-log-in\"></span> Sign Out</a></li>";
+        if (!isAdmin) { admin = ""; }
+		return admin + acc + logOut;
+	}
+	
 	public static String reformatDate(String dbDate) {
 		try {
 			java.util.Date d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(dbDate);
@@ -93,6 +122,7 @@ public class Util {
 		}
 		
 		// Display correct buttons
+		System.out.println("In processUser");
 		String navRight = Util.checkLogin(request, here);
 		request.setAttribute("navRight", navRight); 
 	}
