@@ -82,19 +82,17 @@ public class EnrollStudent extends HttpServlet {
 		    	currEND= s.getSingleResult();
 		    	long currEnd= Long.parseLong(currEND.substring(0,2)+currEND.substring(3));
 		    	
-		    	System.out.println("start "+ start + " currentEnd "+ currEnd + " currStart " + currStart + " end" + end);
+		    	//checks if classes overlap
 		    	if(start<=currEnd && currStart<=end)
 				{
 		    		overlap+= 1;
-		    		System.out.println("Course Overlap");
-					return "Course Overlap";	
+		    		System.out.println("Course Overlap");	return "Course Overlap";	
 				}
 			}	
 			if(overlap==0)
 			{
 		    		Enroll u= new Enroll(sID, Integer.parseInt(courseID), "U");
 					DBUtil.insert(u);
-		    		System.out.println("Course Enrolled");
 		    		return "Course Enrolled";
 			}
 		}
@@ -114,12 +112,12 @@ public class EnrollStudent extends HttpServlet {
     	TypedQuery<String> q = em.createQuery(qString, String.class);
     	enrolledStudents= q.getResultList();
     	student=enrolledStudents.size();
-    	System.out.println("Num of studs "+student);
+    	//System.out.println("Num of studs "+student);
     	List<Course> course= DBUtil.getCourse("SELECT c FROM Course c WHERE c.id = " + courseID);
-    	System.out.println("Course Size: "+course.size());
+    	//System.out.println("Course Size: "+course.size());
     	List<Classroom> room =DBUtil.getRoom("SELECT c FROM Classroom c WHERE c.id = " + course.get(0).getRoomid());
     	maxCap= Integer.parseInt(room.get(0).getMaxcap());
-    	System.out.println("Max Cap: "+maxCap);
+    	//System.out.println("Max Cap: "+maxCap);
     	if(maxCap-student>0)
     	{
     		return "true";
@@ -132,8 +130,8 @@ public class EnrollStudent extends HttpServlet {
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
 		String output= checkEnrollment(request); //checks enrollment
 		String capacity= checkCapacity(request); //checks capacity
-		System.out.println("Check capacity: "+ capacity);
-		System.out.println("Output: "+ output);
+		//System.out.println("Check capacity: "+ capacity);
+		//System.out.println("Output: "+ output);
 		Long studID= (Long) request.getSession().getAttribute("studID");
 		String finStart="", finEnd="";
 		int newStart=0, newEnd=0;

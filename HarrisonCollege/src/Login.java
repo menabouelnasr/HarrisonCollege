@@ -73,7 +73,7 @@ public class Login extends HttpServlet {
 				String sString = "SELECT u.type FROM Usr u where u.id= '"+ request.getSession().getAttribute("userID") + "'";
 		    	TypedQuery<String> s = em.createQuery(sString, String.class);
 		    	studType= s.getSingleResult();
-		    	System.out.println(studType);
+		    	//System.out.println(studType);
 		    	System.out.println("student id: "+id);
 		    	if(studType.equalsIgnoreCase("student"))
 		    	{
@@ -93,7 +93,7 @@ public class Login extends HttpServlet {
 		}
 		else
 		{
-			Usr u= new Usr(email, username, password, "student", 1,"0");
+			Usr u= new Usr(email, username.toLowerCase(), password, "student", 1,"0");
 			DBUtil.insert(u);
 			createStudent(username,major, entryYear, gradYear, request);
 		}
@@ -124,7 +124,7 @@ public class Login extends HttpServlet {
 	private long login(String username, String password) {
 		if (hasNull("x", username, password)) { return -1; }
 		
-		for (Object o : DBUtil.get("SELECT u FROM Usr u WHERE u.username = '" + username + "'")) {
+		for (Object o : DBUtil.get("SELECT u FROM Usr u WHERE u.username = '" + username.toLowerCase() + "'")) {
 			Usr u = (Usr)o;
 			if (u.getPassword().equals(password)) {
 				return u.getId();

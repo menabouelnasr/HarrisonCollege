@@ -37,7 +37,7 @@ public class DropCourse extends HttpServlet {
 		int cID=0, sID=0;
 		cID= Integer.parseInt(courseID);
 		sID= Integer.parseInt(studID);
-		System.out.println(courseID + " "+ studID);
+		//System.out.println(courseID + " "+ studID);
 		for (Object o : DBUtil.get("SELECT e FROM Enroll e WHERE e.studid = " + studID)) 
 		{
 			Enroll c = (Enroll)o;

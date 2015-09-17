@@ -65,7 +65,7 @@ public class DisplayCourse extends HttpServlet {
 		String finStart="", finEnd="";
 		int newStart=0, newEnd=0;
 		
-		System.out.println(time);
+		//System.out.println(time);
 		
 		String query = "SELECT c FROM Course c WHERE 1=1";
 		
@@ -74,7 +74,7 @@ public class DisplayCourse extends HttpServlet {
 		}
 		
 		if (!instructor.equalsIgnoreCase("any")) {
-				System.out.println(instructor);
+				//System.out.println(instructor);
 				query += " AND c.instructorid = " + instructor;
 				
 		}
