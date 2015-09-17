@@ -8,7 +8,7 @@
 
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="list">Course Lookup</a></li>
+        <li class="active"><a href="CourseList">Course Lookup</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
     	${navRight}

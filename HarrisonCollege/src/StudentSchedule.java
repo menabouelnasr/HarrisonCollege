@@ -39,6 +39,9 @@ public class StudentSchedule extends HttpServlet {
 		EntityManager em = DBUtil.getEmFactory().createEntityManager();
 		String html="", startTime="", endTime="", day="", instructorID="";
 		Long studID= (Long) request.getSession().getAttribute("studID");
+		String finStart="", finEnd="";
+		int newStart=0, newEnd=0;
+		
 		if(DBUtil.get("SELECT e FROM Enroll e WHERE e.studid = " + studID).isEmpty())
 		{
 			html="You are not currently enrolled in any courses.";
@@ -55,9 +58,29 @@ public class StudentSchedule extends HttpServlet {
 		    	TypedQuery<String> q = em.createQuery(qString, String.class);
 		    	startTime= q.getSingleResult();
 		    	
+		    	if(Integer.parseInt(startTime.substring(0,2)+ startTime.substring(3))>1200)
+		    	{
+		    		newStart= Integer.parseInt(startTime.substring(0,2)+ startTime.substring(3))-11;
+		    		finStart= Integer.toString(newStart)+ " pm";
+		    	}
+		    	else
+		    	{
+		    		finStart= startTime+ " am";
+		    	}
+		    	
 		    	String sString = "SELECT t.duration FROM Time t where t.id= '"+ n.getTimeid() + "'";
 		    	TypedQuery<String> s = em.createQuery(sString, String.class);
 		    	endTime= s.getSingleResult();
+		    	
+		    	if(Integer.parseInt(endTime.substring(0,2)+ endTime.substring(3))>1200)
+		    	{
+		    		newEnd= Integer.parseInt(endTime.substring(0,2)+ endTime.substring(3))-11;
+		    		finEnd= Integer.toString(newEnd)+ " pm";
+		    	}
+		    	else
+		    	{
+		    		finEnd= endTime+ " am";
+		    	}
 		    	
 		    	String tString = "SELECT t.day FROM Time t where t.id= '"+ n.getTimeid() + "'";
 		    	TypedQuery<String> t = em.createQuery(tString, String.class);
@@ -72,7 +95,7 @@ public class StudentSchedule extends HttpServlet {
 				html += "<td>" + n.getDescription() + "</td>";
 				html += "<td>" + n.getCredits()+ "</td>"; 
 				html += "<td>" + instructorID + "</td>";
-				html += "<td>" +  startTime + "-"+ endTime +"</td>";
+				html += "<td>" +  finStart + "-"+ finEnd +"</td>";
 				html += "<td>" + day + "</td>";
 				html += "<td>" + n.getSubjectcode() + "</td>";
 				html += "<td><a href=\"DropCourse?dropID=" + c.getCourseid() + "&studID="+request.getSession().getAttribute("studID")+"\">" + "x</a>" + "</td></tr>";	

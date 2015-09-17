@@ -62,6 +62,9 @@ public class DisplayCourse extends HttpServlet {
 		String html="", startTime="", endTime=""; 
 		String instructorID="", day="";
 		int output=0;
+		String finStart="", finEnd="";
+		int newStart=0, newEnd=0;
+		
 		System.out.println(time);
 		
 		String query = "SELECT c FROM Course c WHERE 1=1";
@@ -125,9 +128,29 @@ public class DisplayCourse extends HttpServlet {
 	    	TypedQuery<String> q = em.createQuery(qString, String.class);
 	    	startTime= q.getSingleResult();
 	    	
+	    	if(Integer.parseInt(startTime.substring(0,2)+ startTime.substring(3))>1200)
+	    	{
+	    		newStart= Integer.parseInt(startTime.substring(0,2)+ startTime.substring(3))-11;
+	    		finStart= Integer.toString(newStart)+ " pm";
+	    	}
+	    	else
+	    	{
+	    		finStart= startTime+ " am";
+	    	}
+	    	
 	    	String sString = "SELECT t.duration FROM Time t where t.id= '"+ n.getTimeid() + "'";
 	    	TypedQuery<String> s = em.createQuery(sString, String.class);
 	    	endTime= s.getSingleResult();
+	    	
+	    	if(Integer.parseInt(endTime.substring(0,2)+ endTime.substring(3))>1200)
+	    	{
+	    		newEnd= Integer.parseInt(endTime.substring(0,2)+ endTime.substring(3))-11;
+	    		finEnd= Integer.toString(newEnd)+ " pm";
+	    	}
+	    	else
+	    	{
+	    		finEnd= endTime+ " am";
+	    	}
 	    	
 	    	String tString = "SELECT t.day FROM Time t where t.id= '"+ n.getTimeid() + "'";
 	    	TypedQuery<String> t = em.createQuery(tString, String.class);
@@ -142,7 +165,7 @@ public class DisplayCourse extends HttpServlet {
 			html += "<td>" + n.getDescription() + "</td>";
 			html += "<td>" + n.getCredits()+ "</td>"; 
 			html += "<td>" + instructorID + "</td>";
-			html += "<td>" +  startTime + "-"+ endTime +"</td>";
+			html += "<td>" +  finStart + "-"+ finEnd +"</td>";
 			html += "<td>" + day + "</td>";
 			html += "<td>" + n.getSubjectcode() + "</td>";
 			html += "<td><a href=\"EnrollStudent?enrollID=" + n.getId() + "&startTime="+startTime+ "&endTime="+endTime+"\">" + "Enroll</a>" + "</td></tr>";
