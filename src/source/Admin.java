@@ -16,6 +16,12 @@ public class Admin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doProcess(request, response);
 		Util.processUser(request);
+		
+		/*for (Object o1 : DBUtil.get("SELECT DISTINCT c.subjectcode FROM Course c")) {
+			System.out.println(o1);
+			String s = (String)o1;
+		}*/
+		
 		getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
 	}
 

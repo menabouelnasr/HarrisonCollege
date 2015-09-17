@@ -15,7 +15,7 @@
 			top: 10px;
 		}
 		.sections {
-			margin-right: 100px;
+			margin-right: 50px;
 		}
 		
 		body {
@@ -132,6 +132,7 @@
 	 	<a href="#departments" class="sections">Departments</a> 
 	 	<a href="#majors" class="sections">Majors</a> 
 	 	<a href="#accTypes" class="sections">Change User's Account Types</a> 
+	 	<a href="Tuition" class="sections">Tuition Stats</a> 
 	 	<hr/>
 	 	
 	 	<a name="courses"></a><h3>Courses</h3>

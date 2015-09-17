@@ -4,8 +4,10 @@ Create table Instructor(
 	deptID Integer,
 	officeNum VARCHAR(5)
 );
-INSERT INTO Instructor (id, name, deptID, officeNum)
-VALUES (1, 'Ms. Krabapple', 1, '1014');
+INSERT INTO Instructor (id, name, deptID, officeNum) VALUES (1, 'Ms. Krabappel', 1, '1014');
+INSERT INTO Instructor (id, name, deptID, officeNum) VALUES (2, 'Mr. Fraser', 2, '1015');
+INSERT INTO Instructor (id, name, deptID, officeNum) VALUES (3, 'Ms. Kaplan', 3, '1016');
+INSERT INTO Instructor (id, name, deptID, officeNum) VALUES (4, 'Mr. Smith', 4, '1017');
 SELECT * FROM Instructor;
 
 Create table Student(
@@ -15,8 +17,13 @@ Create table Student(
 	entryYear VARCHAR(10),
 	gradYear VARCHAR(10)
 );
-INSERT INTO Student (id, name, major, entryYear, gradYear)
-VALUES (1, 'Bob', 'English', '2015', null);
+INSERT INTO Student (id, name, major, entryYear, gradYear) VALUES (1, 'Bob',              'English',           '2015', null);
+INSERT INTO Student (id, name, major, entryYear, gradYear) VALUES (2, 'Bill Cosby',       'Art',               '2016', null);
+INSERT INTO Student (id, name, major, entryYear, gradYear) VALUES (3, 'Fox Mulder',       'Psychology',        '2017', null);
+INSERT INTO Student (id, name, major, entryYear, gradYear) VALUES (4, 'Ron Paul',         'Political Science', '2018', null);
+INSERT INTO Student (id, name, major, entryYear, gradYear) VALUES (5, 'Douglas MacArthur','Law',               '2019', null);
+INSERT INTO Student (id, name, major, entryYear, gradYear) VALUES (6, 'Augustus Caesar',  'History',           '2020', null);
+INSERT INTO Student (id, name, major, entryYear, gradYear) VALUES (7, 'Jackie Chan',      'Law',               '2021', null);
 SELECT * FROM Student;  
   
 DROP TABLE department;
@@ -84,65 +91,65 @@ INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID
 VALUES (6, 1, 1, 'ENGL', '393', '0301', 1, 1, 1, 'Technical Writing', 'Write Professionally.', '3', 'Fall 2015');
 
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (7, 1, 1, 'SPAN', '101', '0101', 1, 1, 1, 'Introductory Spanish', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (7, 1, 2, 'SPAN', '101', '0101', 1, 1, 1, 'Introductory Spanish', 'Learn Spanish.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (8, 1, 1, 'FREN', '101', '0101', 1, 1, 1, 'Introductory French', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (8, 1, 3, 'FREN', '101', '0101', 1, 1, 1, 'Introductory French', 'Learn French.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (9, 1, 1, 'CHIN', '101', '0101', 1, 1, 1, 'Introductory Chinese', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (9, 1, 4, 'CHIN', '101', '0101', 1, 1, 1, 'Introductory Chinese', 'Learn Chinese.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (10, 1, 1, 'KORE', '101', '0101', 1, 1, 1, 'Introductory Korean', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (10, 1, 5, 'KORE', '101', '0101', 1, 1, 1, 'Introductory Korean', 'Learn Korean.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (11, 1, 1, 'GERM', '101', '0101', 1, 1, 1, 'Introductory German', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (11, 1, 6, 'GERM', '101', '0101', 1, 1, 1, 'Introductory German', 'Learn German.', '3', 'Fall 2015');
 
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (12, 1, 1, 'PMED', '101', '0101', 1, 1, 1, 'Introductory Pre-Medicine', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (12, 1, 7, 'PMED', '101', '0101', 1, 1, 1, 'Introductory Pre-Medicine', 'Learn Pre-Medicine.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (13, 1, 1, 'BIOL', '101', '0101', 1, 1, 1, 'Introductory Biology', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (13, 1, 8, 'BIOL', '101', '0101', 1, 1, 1, 'Introductory Biology', 'Learn Biology.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (14, 1, 1, 'CHEM', '101', '0101', 1, 1, 1, 'Introductory Chemistry', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (14, 1, 9, 'CHEM', '101', '0101', 1, 1, 1, 'Introductory Chemistry', 'Learn Chemistry.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (15, 1, 1, 'PHYS', '101', '0101', 1, 1, 1, 'Introductory Physics', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (15, 1, 10, 'PHYS', '101', '0101', 1, 1, 1, 'Introductory Physics', 'Learn Physics.', '3', 'Fall 2015');
 
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (16, 1, 1, 'SOCI', '101', '0101', 1, 1, 1, 'Introductory Sociology', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (16, 1, 11, 'SOCI', '101', '0101', 1, 1, 1, 'Introductory Sociology', 'Learn Sociology.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (17, 1, 1, 'PSYC', '101', '0101', 1, 1, 1, 'Introductory Psychology', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (17, 1, 12, 'PSYC', '101', '0101', 1, 1, 1, 'Introductory Psychology', 'Learn Psychology.', '3', 'Fall 2015');
 
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (18, 1, 1, 'MECE', '101', '0101', 1, 1, 1, 'Introductory Mechanical Engineering', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (18, 1, 13, 'MECE', '101', '0101', 1, 1, 1, 'Introductory Mechanical Engineering', 'Learn Mechanical Engineering.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (19, 1, 1, 'ELCE', '101', '0101', 1, 1, 1, 'Introductory Electrical Engineering', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (19, 1, 14, 'ELCE', '101', '0101', 1, 1, 1, 'Introductory Electrical Engineering', 'Learn Electrical Engineering.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (20, 1, 1, 'AERO', '101', '0101', 1, 1, 1, 'Introductory Aerospace Engineering', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (20, 1, 15, 'AERO', '101', '0101', 1, 1, 1, 'Introductory Aerospace Engineering', 'Learn Aerospace Engineering.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (21, 1, 1, 'CHME', '101', '0101', 1, 1, 1, 'Introductory Chemical Engineering', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (21, 1, 16, 'CHME', '101', '0101', 1, 1, 1, 'Introductory Chemical Engineering', 'Learn Chemical Engineering.', '3', 'Fall 2015');
 
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (40, 1, 1, 'CMSC', '131', '0101', 1, 1, 1, 'Introduction To Java I', 'Learn fundamentals of computer science.', '3', 'Fall 2015');
+VALUES (40, 1, 18, 'CMSC', '131', '0101', 1, 1, 1, 'Introduction To Java I', 'Learn fundamentals of computer science.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (41, 1, 1, 'CMSC', '132', '0101', 1, 1, 1, 'Introduction To Java II', 'Learn fundamentals of computer science.', '3', 'Fall 2015');
+VALUES (41, 1, 18, 'CMSC', '132', '0101', 1, 1, 1, 'Introduction To Java II', 'Learn fundamentals of computer science.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (42, 1, 1, 'CMSC', '216', '0101', 1, 1, 1, 'Computer Systems', 'Learn low level C in a Unix envirnoment', '3', 'Fall 2015');
+VALUES (42, 1, 18, 'CMSC', '216', '0101', 1, 1, 1, 'Computer Systems', 'Learn low level C in a Unix envirnoment', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (23, 1, 1, 'CMEE', '101', '0101', 1, 1, 1, 'Introductory Computer Engineering', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (23, 1, 17, 'CMEE', '101', '0101', 1, 1, 1, 'Introductory Computer Engineering', 'Learn Computer Engineering.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (24, 1, 1, 'ITEC', '101', '0101', 1, 1, 1, 'Introductory Information Technology', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (24, 1, 19, 'ITEC', '101', '0101', 1, 1, 1, 'Introductory Information Technology', 'Learn Information Technology.', '3', 'Fall 2015');
 
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (25, 1, 1, 'LAW', '101', '0101', 1, 1, 1, 'Introductory Law', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (25, 1, 20, 'LAW', '101', '0101', 1, 1, 1, 'Introductory Law', 'Learn Law.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (26, 1, 1, 'PHIL', '101', '0101', 1, 1, 1, 'Introductory Philosophy', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (26, 1, 21, 'PHIL', '101', '0101', 1, 1, 1, 'Introductory Philosophy', 'Learn Philosophy.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (27, 1, 1, 'HIST', '101', '0101', 1, 1, 1, 'Introductory History', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (27, 1, 22, 'HIST', '101', '0101', 1, 1, 1, 'Introductory History', 'Learn History.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (28, 1, 1, 'PLSC', '101', '0101', 1, 1, 1, 'Introductory Political Science', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (28, 1, 23, 'PLSC', '101', '0101', 1, 1, 1, 'Introductory Political Science', 'Learn Political Science.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (29, 1, 1, 'BUSI', '101', '0101', 1, 1, 1, 'Introductory Business', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (29, 1, 24, 'BUSI', '101', '0101', 1, 1, 1, 'Introductory Business', 'Learn Business.', '3', 'Fall 2015');
 
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (30, 1, 1, 'MUSC', '101', '0101', 1, 1, 1, 'Introductory Music', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (30, 1, 25, 'MUSC', '101', '0101', 1, 1, 1, 'Introductory Music', 'Learn Music.', '3', 'Fall 2015');
 INSERT INTO Course (id, enabled, deptID, subjectCode, courseNum, section, timeID, instructorID, roomID, name, description, credits, semester)
-VALUES (31, 1, 1, 'THTR', '101', '0101', 1, 1, 1, 'Introductory Theater', 'Write Professionally.', '3', 'Fall 2015');
+VALUES (31, 1, 26, 'THTR', '101', '0101', 1, 1, 1, 'Introductory Theater', 'Learn Theater.', '3', 'Fall 2015');
 
 SELECT * FROM Course;
 
@@ -187,9 +194,47 @@ Create table Enroll(
 	courseID integer,
 	grade	VARCHAR(4)
 );
-INSERT INTO Enroll (id, studID, courseID, grade)
-VALUES (1, 1, 1, 'U');
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (1, 1, 1, 'U');
+
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (2, 2, 18, 'U');
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (3, 2, 17, 'U');
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (4, 2, 16, 'U');
+
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (5, 3, 15, 'U');
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (6, 3, 14, 'U');
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (7, 3, 13, 'U');
+
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (8,  4, 12, 'U');
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (9,  4, 11, 'U');
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (10, 4, 10, 'U');
+
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (11, 5, 9, 'U');
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (12, 5, 8, 'U');
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (13, 5, 7, 'U');
+
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (14, 6, 6, 'U');
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (15, 6, 5, 'U');
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (16, 6, 4, 'U');
+
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (16, 7, 3, 'U');
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (17, 7, 2, 'U');
+INSERT INTO Enroll (id, studID, courseID, grade) VALUES (18, 7, 1, 'U');
+
 SELECT * FROM Enroll;	
+
+SELECT * FROM Course, Enroll, Student, Usr WHERE enroll.courseid = Course.id AND enroll.studid = Student.id AND Usr.typeID = Student.id;
+
+
+
+INSERT INTO Student (id, name, major, entryYear, gradYear) VALUES (1, 'Bob',              'English',           '2015', null);
+INSERT INTO Student (id, name, major, entryYear, gradYear) VALUES (2, 'Bill Cosby',       'Art',               '2016', null);
+INSERT INTO Student (id, name, major, entryYear, gradYear) VALUES (3, 'Fox Mulder',       'Psychology',        '2017', null);
+INSERT INTO Student (id, name, major, entryYear, gradYear) VALUES (4, 'Ron Paul',         'Political Science', '2018', null);
+INSERT INTO Student (id, name, major, entryYear, gradYear) VALUES (5, 'Douglas MacArthur','Law',               '2019', null);
+INSERT INTO Student (id, name, major, entryYear, gradYear) VALUES (6, 'Augustus Caesar',  'History',           '2020', null);
+INSERT INTO Student (id, name, major, entryYear, gradYear) VALUES (7, 'Jackie Chan',      'Law',               '2021', null);
+
+
   
 Create table Usr(
 	id Integer primary key,
@@ -202,16 +247,60 @@ Create table Usr(
 );
 INSERT INTO Usr (id, username, password, email, type, typeID, money)
 VALUES (1, 'Bob', 'password', 'Bob@bob.com', 'Student', 1, '0');
-SELECT * FROM Usr;
+INSERT INTO Usr (id, username, password, email, type, typeID, money)
+VALUES (2, 'A27Blue', 'password', 'Bob@bob.com', 'Student', 2, '0');
+INSERT INTO Usr (id, username, password, email, type, typeID, money)
+VALUES (3, 'RRice12', 'password', 'Bob@bob.com', 'Student', 3, '0');
+INSERT INTO Usr (id, username, password, email, type, typeID, money)
+VALUES (4, 'Redwings', 'password', 'Bob@bob.com', 'Student', 4, '0');
+INSERT INTO Usr (id, username, password, email, type, typeID, money)
+VALUES (5, 'Manu Is Back', 'password', 'Bob@bob.com', 'Student', 5, '0');
+INSERT INTO Usr (id, username, password, email, type, typeID, money)
+VALUES (6, 'T Sqaured', 'password', 'Bob@bob.com', 'Instructor', 1, '0');
+INSERT INTO Usr (id, username, password, email, type, typeID, money)
+VALUES (7, 'Redpox28', 'password', 'Bob@bob.com', 'Student', 6, '0');
+INSERT INTO Usr (id, username, password, email, type, typeID, money)
+VALUES (8, 'Lunchbox', 'password', 'Bob@bob.com', 'Instructor', 2, '0');
+INSERT INTO Usr (id, username, password, email, type, typeID, money)
+VALUES (9, 'Jurazic', 'password', 'Bob@bob.com', 'Student', 7, '0');
+INSERT INTO Usr (id, username, password, email, type, typeID, money)
+VALUES (10, 'Bob Dole', 'password', 'Bob@bob.com', 'Advisor', 3, '0');
 
-CREATE SEQUENCE CLASSROOM_ID_GENERATOR;
-CREATE SEQUENCE COURSE_ID_GENERATOR;
-CREATE SEQUENCE DEPARTMENT_ID_GENERATOR;
-CREATE SEQUENCE ENROLL_ID_GENERATOR;
-CREATE SEQUENCE INSTRUCTOR_ID_GENERATOR;
-CREATE SEQUENCE STUDENT_ID_GENERATOR;
-CREATE SEQUENCE TIME_ID_GENERATOR;
-CREATE SEQUENCE USRS_ID_GENERATOR;
+SELECT * FROM Usr
+
+
+
+DROP SEQUENCE CLASSROOM_ID_GENERATOR;
+CREATE SEQUENCE CLASSROOM_ID_GENERATOR
+MINVALUE 1 START WITH 100 INCREMENT BY 1 CACHE 10;
+
+DROP SEQUENCE COURSE_ID_GENERATOR;
+CREATE SEQUENCE COURSE_ID_GENERATOR
+MINVALUE 1 START WITH 100 INCREMENT BY 1 CACHE 10;
+
+DROP SEQUENCE DEPARTMENT_ID_GENERATOR;
+CREATE SEQUENCE DEPARTMENT_ID_GENERATOR
+MINVALUE 1 START WITH 100 INCREMENT BY 1 CACHE 10;
+
+DROP SEQUENCE ENROLL_ID_GENERATOR;
+CREATE SEQUENCE ENROLL_ID_GENERATOR
+MINVALUE 1 START WITH 100 INCREMENT BY 1 CACHE 10;
+
+DROP SEQUENCE INSTRUCTOR_ID_GENERATOR;
+CREATE SEQUENCE INSTRUCTOR_ID_GENERATOR
+MINVALUE 1 START WITH 100 INCREMENT BY 1 CACHE 10;
+
+DROP SEQUENCE STUDENT_ID_GENERATOR;
+CREATE SEQUENCE STUDENT_ID_GENERATOR
+MINVALUE 1 START WITH 100 INCREMENT BY 1 CACHE 10;
+
+DROP SEQUENCE TIME_ID_GENERATOR;
+CREATE SEQUENCE TIME_ID_GENERATOR
+MINVALUE 1 START WITH 100 INCREMENT BY 1 CACHE 10;
+
+DROP SEQUENCE USRS_ID_GENERATOR;
+CREATE SEQUENCE USRS_ID_GENERATOR
+MINVALUE 1 START WITH 100 INCREMENT BY 1 CACHE 10;
 
 
 
