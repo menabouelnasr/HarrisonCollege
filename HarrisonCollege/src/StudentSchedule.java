@@ -60,7 +60,7 @@ public class StudentSchedule extends HttpServlet {
 		    	
 		    	if(Integer.parseInt(startTime.substring(0,2)+ startTime.substring(3))>1200)
 		    	{
-		    		newStart= Integer.parseInt(startTime.substring(0,2)+ startTime.substring(3))-11;
+		    		newStart= Integer.parseInt(startTime.substring(0,2)+ startTime.substring(3))-1200;
 		    		finStart= Integer.toString(newStart)+ " pm";
 		    	}
 		    	else
@@ -74,7 +74,7 @@ public class StudentSchedule extends HttpServlet {
 		    	
 		    	if(Integer.parseInt(endTime.substring(0,2)+ endTime.substring(3))>1200)
 		    	{
-		    		newEnd= Integer.parseInt(endTime.substring(0,2)+ endTime.substring(3))-11;
+		    		newEnd= Integer.parseInt(endTime.substring(0,2)+ endTime.substring(3))-1200;
 		    		finEnd= Integer.toString(newEnd)+ " pm";
 		    	}
 		    	else
