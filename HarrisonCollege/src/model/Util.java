@@ -55,7 +55,7 @@ public class Util {
        
         
         String acc = "<li class=\"dropdown\">" + 
-        "<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> " + userName + "'s Profile<span class=\"caret\"></span></a>" +
+        "<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-user\"></span> " + (userName.substring(0,1).toUpperCase()+ userName.substring(1)) + "'s Profile<span class=\"caret\"></span></a>" +
 	    "<ul class=\"dropdown-menu\">" + 
         "<li><a href=\"StudentSchedule\">My Schedule</a></li>" + 
         "<li><a href=\"Transcript\">My Transcript</a></li>" + 
