@@ -147,21 +147,21 @@ public class StudentDB {
 					em.close();
 				}
 		}
-			
-			
-			public static void delete(Object o) {
+			public static void insert(Object o) {
 				EntityManager em = DBUtil.getEmFactory().createEntityManager();
 				EntityTransaction trans = em.getTransaction();
 				trans.begin();
 				try {
-					em.remove(em.merge(o));
+					em.persist(o);
 					trans.commit();
 				} catch (Exception e) {
-					System.out.println(e);
+					e.printStackTrace();
 					trans.rollback();
 				} finally {
 					em.close();
 				}
-			}	
+			
+			}
+			
 		
 	}

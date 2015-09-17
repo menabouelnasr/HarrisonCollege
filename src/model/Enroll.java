@@ -7,7 +7,7 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="Enroll", schema="testDB")
+@Table(name="Enroll", schema="TESTDB")
 @NamedQuery(name="Enroll.findAll", query="SELECT e FROM Enroll e")
 public class Enroll implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -25,7 +25,12 @@ public class Enroll implements Serializable {
 
 	public Enroll() {
 	}
-
+	public Enroll(long cID, int sID, String Grade)
+	{
+		this.courseid=cID;
+		this.grade=Grade;
+		this.studid=sID;
+	}
 	public long getId() {
 		return this.id;
 	}

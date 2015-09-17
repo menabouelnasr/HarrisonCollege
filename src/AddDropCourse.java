@@ -29,7 +29,6 @@ public class AddDropCourse extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String adddrop="";
@@ -42,7 +41,7 @@ public class AddDropCourse extends HttpServlet {
 				
 				adddrop += "<tr>";
 				adddrop += "<td><a href=\"DisplayCourse?Idd=" + s.getId()+"\">"
-						+ s.getName()+"</td><td>"+ s.getMajor() +"</td>";
+						+ s.getName()+"</a></td><td>"+ s.getMajor() +"</td>";
 				adddrop += "</tr>";	
 			}
 			
@@ -82,7 +81,7 @@ public class AddDropCourse extends HttpServlet {
 			currentc += "<tr>" 
 					 + "<td><a href= " + "\'" + "CourseD?courseId="+ c.getId()+ "\">" +c.getName()+"</a>"+c.getCredits()+"<tr>"+"</td>";
 			currentc += "</tr>";		
-		
+
 		}			
 //		currentc += "<tr>";
 //		currentc += "<td><a href=\"CourseDetail?Id="+c.getId()+"\">" +c.getClass()+"</td><td>"+ c.getGrade()="N/A"+"</td>";
@@ -98,6 +97,5 @@ public class AddDropCourse extends HttpServlet {
 	}finally{
 		em.close();}
 	}	
-	
 	}
 		

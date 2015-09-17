@@ -78,6 +78,7 @@ public class CourseD extends HttpServlet {
 		currentg += "</div>";
 		request.setAttribute("currentg",currentg);
 		getServletContext().getRequestDispatcher("DisplayCourse").forward(request,response);
+		
 	}
 			
 

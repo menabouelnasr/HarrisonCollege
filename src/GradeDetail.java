@@ -28,8 +28,7 @@ public class GradeDetail extends HttpServlet {
         super();
         grades = "";
         // TODO Auto-generated constructor stub
-    }
-
+    }    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -107,7 +106,6 @@ public class GradeDetail extends HttpServlet {
 		getServletContext().getRequestDispatcher("/transcript.jsp").forward(request,response);
 	}
 			
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
