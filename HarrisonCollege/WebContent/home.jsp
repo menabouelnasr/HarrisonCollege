@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>List</title>
+	<title>Harrison College</title>
 <meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
@@ -38,13 +38,6 @@
   </div>
 </nav>
 	<div class="container">	
-		<form role="form" method="post" action="list">
-			<div class="form-group">
-				<input type="text" class="form-control" name="search" placeholder="Search"> <!-- autofocus -->
-			</div>
-		</form>
-
-	 	<h2></h2>
 </body>
 	
 	

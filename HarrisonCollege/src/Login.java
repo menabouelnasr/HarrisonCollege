@@ -83,6 +83,10 @@ public class Login extends HttpServlet {
 		    	{
 		    		request.getSession().setAttribute("insID", id);
 		    	}
+		    	if(studType.equalsIgnoreCase("Admin"))
+		    	{
+		    		request.getSession().setAttribute("adminID", id);
+		    	}
 			}
 		}
 		

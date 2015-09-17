@@ -173,10 +173,12 @@ public class DisplayCourse extends HttpServlet {
 				html += "<td>" + day + "</td>";
 				html += "<td>" + n.getSubjectcode() + "</td>";
 				
-				if(request.getSession().getAttribute("insID")==null)
+				System.out.println(request.getSession().getAttribute("insID")+"    ^^^" +  request.getSession().getAttribute("adminID"));
+				if(request.getSession().getAttribute("insID")==null && request.getSession().getAttribute("adminID")==null )
 				{
 					html += "<td><a href=\"EnrollStudent?enrollID=" + n.getId() + "&startTime="+startTime+ "&endTime="+endTime+"\">" + "Enroll</a>" + "</td></tr>";
 				}
+				
 			} 
 		}
 		if(output>0)

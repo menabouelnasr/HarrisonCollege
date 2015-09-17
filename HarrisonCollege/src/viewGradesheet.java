@@ -31,6 +31,7 @@ public class viewGradesheet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Util.processUser(request);
 		String display =  getGradeEnrollList(request.getParameter("courseId"));
 		request.setAttribute("tabledisplay", display);
 		request.setAttribute("currentCourse", "<h2>Gradesheet</h2>");

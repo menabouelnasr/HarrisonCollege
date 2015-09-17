@@ -95,4 +95,7 @@ public class DBUtil {
 			em.close();
 		}
 	}
+	public static Classroom getOneRoom(String qString) {
+		return emf.createEntityManager().createQuery(qString, Classroom.class).getSingleResult();
+	}
 }

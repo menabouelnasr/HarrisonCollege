@@ -1,0 +1,88 @@
+		th.right {
+		    text-align: right;
+		}
+		td.this {
+			padding: 0px 10px 0px 10px;
+		}
+		.tt {
+			position: relative;
+			left: 15px;
+			top: 10px;
+		}
+		.tt2 {
+			position: relative;
+			left: 15px;
+			top: 3px;
+		}
+		.tf {
+			background-color: #f8f8f8;
+		}
+		body {
+		 	background-image: url('http://diplomaclassics.com/images/Entities/insignia/v2/HacoSealGold_220.png');
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-position: center;
+		}
+		
+/* navbar */
+.navbar-inverse {
+    background-color: #0A4600;
+    border-color: #E7E7E7;
+}
+/* title */
+.navbar-inverse .navbar-brand {
+    color: #97D38D;
+}
+.navbar-inverse .navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+    color: #ffffff;
+}
+/* link */
+.navbar-inverse .navbar-nav > li > a {
+    color: #97D38D;		// Actual links
+}
+.navbar-inverse .navbar-nav > li > a:hover,
+.navbar-inverse .navbar-nav > li > a:focus {
+	background-color: #64B058;
+    color: #ffffff;		// Text when hovered
+    
+}
+.navbar-inverse .navbar-nav > .active > a, 
+.navbar-inverse .navbar-nav > .active > a:hover, 
+.navbar-inverse .navbar-nav > .active > a:focus {
+    color: #97 D3 8D;
+    background-color: #1E6912;
+}
+.navbar-inverse .navbar-nav > .open > a, 
+.navbar-inverse .navbar-nav > .open > a:hover, 
+.navbar-inverse .navbar-nav > .open > a:focus {
+    color: #fff;
+    background-color: #1E6912
+}
+/* caret */
+.navbar-inverse .navbar-nav > .dropdown > a .caret {
+    border-top-color: #777;
+    border-bottom-color: #777;
+}
+.navbar-inverse .navbar-nav > .dropdown > a:hover .caret,
+.navbar-inverse .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: #333;
+    border-bottom-color: #333;
+}
+.navbar-inverse .navbar-nav > .open > a .caret, 
+.navbar-inverse .navbar-nav > .open > a:hover .caret, 
+.navbar-inverse .navbar-nav > .open > a:focus .caret {
+    border-top-color: #555;
+    border-bottom-color: #555;
+}
+/* mobile version */
+.navbar-inverse .navbar-toggle {
+    border-color: #DDD;
+}
+.navbar-inverse .navbar-toggle:hover,
+.navbar-inverse .navbar-toggle:focus {
+    background-color: #DDD;
+}
+.navbar-inverse .navbar-toggle .icon-bar {
+    background-color: #CCC;
+}

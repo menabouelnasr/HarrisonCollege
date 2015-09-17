@@ -32,11 +32,15 @@ public class Util {
 			for (Usr u : users) {
 				if(u.getType().equalsIgnoreCase("student"))
 				{
-					return formatSignOutButtons(u.getId(), u.getUsername(), here, isAdmin(userID));
+					return formatSignOutButtons(u.getId(), u.getUsername(), here, false);
 				}
 				else if(u.getType().equalsIgnoreCase("instructor"))
 				{
-					return formatInstructorButtons(u.getId(), u.getUsername(), here, isAdmin(userID));
+					return formatInstructorButtons(u.getId(), u.getUsername(), here, false);
+				}
+				else if(u.getType().equalsIgnoreCase("admin"))
+				{
+					return formatAdminButtons(u.getId(), u.getUsername(), here, true);
 				}
 			}
 			return loginButtons;
@@ -44,12 +48,12 @@ public class Util {
 	}
 	
 	private static boolean isAdmin(long userID) {
-		/*EntityManager em = DBUtil.getEmFactory().createEntityManager();
-		String qString = "SELECT u FROM ScUser u WHERE u.id = " + userID ;
-		List<GUser> users = em.createQuery(qString, GUser.class).getResultList();
-		for (GUser u : users) {
-			return u.getAdmin();
-		}*/
+		EntityManager em = DBUtil.getEmFactory().createEntityManager();
+		String qString = "SELECT u FROM Usr u WHERE u.type = 'admin' AND u.id =" + userID; 
+		List<Usr> users = em.createQuery(qString, Usr.class).getResultList();
+		for (Usr u : users) {
+			return true;
+		}
 		return false;
 	}
 	
@@ -96,6 +100,24 @@ public class Util {
 		return admin + acc + logOut;
 	}
 	
+	private static String formatAdminButtons(long userID, String userName, boolean here, boolean isAdmin) {
+		String select = "";
+		if (here) {
+			select = " class=\"active\"";
+		}
+		
+        String acc = "<li class=\"dropdown\">" + 
+        "<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-cog\"></span> Admin<span class=\"caret\"></span></a>" +
+	    "<ul class=\"dropdown-menu\">" + 
+		    "<li><a href=\"Admin\">Admin Panel</a></li>" + 
+		    "<li><a href=\"Tuition\">Tuition</a></li>" + 
+		    "<li><a href=\"CourseList\">Course Lookup</a></li>" + 
+	    "</ul></li>";
+        
+        String logOut = "<li><a href=\"login?logout=true\"><span class=\"glyphicon glyphicon-log-in\"></span> Sign Out</a></li>";
+		return acc + logOut;
+	}
+	
 	public static String reformatDate(String dbDate) {
 		try {
 			java.util.Date d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(dbDate);
@@ -119,6 +141,9 @@ public class Util {
 		String logout  = request.getParameter("logout");
 		if (logout != null && logout.equals("true")) {
 			request.getSession().setAttribute("userID", null);
+			request.getSession().setAttribute("insID", null);
+			request.getSession().setAttribute("adminID", null);
+			request.getSession().setAttribute("studID", null);
 		}
 		
 		// Display correct buttons
