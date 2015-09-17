@@ -33,15 +33,15 @@ public class CourseDetail extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getParameter("courseId"));
+		String finStart="", finEnd="",  startTime="", endTime="";
+		int newStart=0, newEnd=0;
+		
+		
 		List<Course> cousr_list = DBUtil.getCourse("select c from Course c where c.id=" + request.getParameter("courseId"));
-		String display = "<style>" + ".bs-example{" + "margin-top:20%"
-				+ "margin-left:20%" + "margin-bottom:20%" + "}"
-
-				+ "table { " + " table-layout: fixed;"
+		String display = "<style> table { " + " table-layout: fixed;"
 				+ " word-wrap: break-word;" + "}" + "</style>";
 
-		display += "<table class=" + "\"table table-striped\""
+		display += "<table class=" + "\"table table-striped\""  
 				+ "style=width:100%>";
 
 		display += "<tr>" + "<th><strong>" + "Course Name" + "</strong></th><br>"  
@@ -66,7 +66,7 @@ public class CourseDetail extends HttpServlet {
 			List<Department> department = DBUtil.getDepartment("SELECT d FROM Department d where d.id=" +course.getDeptid());
 			List<Time> time_list = DBUtil.getTime("Select t from Time t where t.id=" +course.getTimeid());
 			
-			
+		
 			display += "<tr>" 
 					+ "<td>" + course.getName() + "</td>" 
 					+ "<td>" + course.getDescription()+ "</td>"
@@ -77,7 +77,7 @@ public class CourseDetail extends HttpServlet {
 					+ "<td>" + course.getCoursenum()+ "</td>"
 					+ "<td>" + instructor.get(0).getName()+ "</td>"
 					+ "<td>" + department.get(0).getName()+ "</td>"
-					+ "<td>" + time_list.get(0).getDay() + "  " + time_list.get(0).getTime()+ "</td>"
+					+ "<td>" + time_list.get(0).getDay() + "  " + time_list.get(0).getTime() + "</td>"
 					+ "</tr>";
 		}
 		
@@ -85,11 +85,6 @@ public class CourseDetail extends HttpServlet {
 		request.setAttribute("tabledisplay", display);
 				
 		getServletContext().getRequestDispatcher("/coursedetails.jsp").forward(request, response);
-		
-		
-		
-		
-		
 		
 	}
 

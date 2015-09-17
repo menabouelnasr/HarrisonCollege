@@ -57,20 +57,15 @@ public class Instruct extends HttpServlet {
 			
 			System.out.println(semester + " "+ depId + " "+ instructor + " "+ major + " "+ subject +" "+time);
 
-			String display = "<style>" + ".bs-example{" + "margin-top:20%"
-								+ "margin-left:20%" + "margin-bottom:20%" + "}"
-
-								+ "table { " + " table-layout: fixed;"
+			String display = "<style>" + "table { " + " table-layout: fixed;"
 								+ " word-wrap: break-word;" + "}" + "</style>";
 
-			display += "<table class=" + "\"table table-striped\""
+			display += "<table class=" + "\"table table-striped\""  
 						+ "style=width:100%>";
 
 			display += "<tr>" + "<th><strong>" + "Course List" + "</strong></th><br>"  
 						+ "</tr>"
 						;
-				
-			
 				//String usrId = request.getSession().getAttribute("userID").toString();
 				
 				String query = "SELECT c FROM Course c WHERE 1=1";
@@ -101,14 +96,22 @@ public class Instruct extends HttpServlet {
 				}
 	
 				if(!time.equalsIgnoreCase("any")){
-					List<Time> time_list = DBUtil.getTime("Select t from Time t");
-					
-					for(Time tm: time_list){
-						query += " AND c.deptid=" + tm.getId();
+					List<Time> time_list = DBUtil.getTime("Select t from Time t where t.day='" +time + "\'");
+
+					if(time_list.size()==0){
+						query += " AND c.timeid=0"; 
 					}
-		
+					else if(time_list.size()==1){
+						query += " AND c.timeid=" + time_list.get(0).getId();
+					}else{
+						query += " AND c.timeid=" + time_list.get(0).getId();
+						for(int i=1; i<time_list.size();i++){
+							query += " OR c.timeid=" + time_list.get(i).getId();
+						}
+					}
 				}
-					
+				
+				System.out.println(query);	
 				List<Course> course_list = DBUtil.getCourse(query);
 				display += getCourseLine(course_list);
 				
@@ -171,7 +174,7 @@ private void getDropDownValue(HttpServletRequest request) {
 			
 		}
 		line += "</table>";
-		System.out.println(line);
+		
 		return line;
 		
 	}

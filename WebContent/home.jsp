@@ -14,25 +14,6 @@
   </div>
 </nav>
 
-	<div class="container">	
-		<form role="form" method="post" action="list">
-			<div class="form-group">
-				<input type="text" class="form-control" name="search" placeholder="Search"> <!-- autofocus -->
-			</div>
-		</form>
-	
-	 	<h2>Products</h2>
-		<!-- <table class="table table-hover table-condensed">
-			<thead>
-				<tr>
-					<th>#</th>
-					<th>Picture</th>
-					<th>Name</th>
-					<th>Price</th>
-					<th>Availability</th>
-				</tr>
-			</thead>
-			 -->
 		    <tbody>
 				${products}
 		    </tbody>

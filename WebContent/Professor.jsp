@@ -2,7 +2,17 @@
 <html lang="en">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
-	<title>List</title>
+	<title>InstructHome</title>
+<style type="text/css">
+    .bs-example{
+    	margin-top: 10%;
+    	margin-left: 40%;
+    	margin-right: 20%;
+    	marfin-bottom: 40%;
+    }
+   
+</style>
+
 <jsp:include page="includes/navAndHeader.jsp"/>
 
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -17,11 +27,7 @@
 </nav>
 
 	<div class="container">	
-		<form role="form" method="post" action="Instruct">
-			<div class="form-group">
-				<input type="text" class="form-control" name="search" placeholder="Search"> <!-- autofocus -->
-			</div>
-		</form>
+		
 	
 	 	<h2>Courses</h2>
 		<table class="table table-hover table-condensed"> <!-- style="width: 500px; position: absolute; left: 80px; top: 150px;" -->

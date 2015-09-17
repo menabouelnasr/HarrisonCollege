@@ -62,7 +62,6 @@ public class InstructHome extends HttpServlet {
 	private String getPrevSemDet(int userID) {
 		//List<Course> courses = DBUtil.getCourse("SELECT c FROM Course c where c.instructorid="+ userID + " and c.semester='" +getCurrentSem() + "\'" );
 		List<Course> courses = DBUtil.getCourse("SELECT c FROM Course c where c.instructorid=1 and c.enabled= 0 order by c.semester DESC");
-		System.out.println(getCourseHeader() +	getprevSemLine(courses));
 		return getCourseHeader() +	getprevSemLine(courses); 
 	}
 
