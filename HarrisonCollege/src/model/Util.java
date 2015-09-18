@@ -27,7 +27,7 @@ public class Util {
 			return loginButtons;
 		} else {
 			EntityManager em = DBUtil.getEmFactory().createEntityManager();
-			String qString = "SELECT u FROM Usr u WHERE u.id = " + userID;
+			String qString = "SELECT u FROM Usr u WHERE u.typeid = " + userID;
 			List<Usr> users = em.createQuery(qString, Usr.class).getResultList();
 			for (Usr u : users) {
 				if(u.getType().equalsIgnoreCase("student"))
@@ -41,6 +41,9 @@ public class Util {
 				else if(u.getType().equalsIgnoreCase("admin"))
 				{
 					return formatAdminButtons(u.getId(), u.getUsername(), here, true);
+				}
+				else if (u.getType().equalsIgnoreCase("advisor")) {
+					return formatAdvisorButtons(u.getId(), u.getUsername(), here, true);
 				}
 			}
 			return loginButtons;
@@ -118,6 +121,24 @@ public class Util {
 		return acc + logOut;
 	}
 	
+	private static String formatAdvisorButtons(long userID, String userName, boolean here, boolean isAdmin) {
+		String select = "";
+		if (here) {
+			select = " class=\"active\"";
+		}
+		
+        String acc = "<li class=\"dropdown\">" + 
+        "<a class=\"dropdown-toggle\" data-toggle=\"dropdown\" href=\"#\"><span class=\"glyphicon glyphicon-cog\"></span> Advisor<span class=\"caret\"></span></a>" +
+	    "<ul class=\"dropdown-menu\">" + 
+		    "<li><a href=\"Advisor\">View Transcript</a></li>" + 
+		    "<li><a href=\"AddDropCourse\">Edit Courses</a></li>" + 
+		    "<li><a href=\"CourseList\">Course Lookup</a></li>" + 
+	    "</ul></li>";
+        
+        String logOut = "<li><a href=\"login?logout=true\"><span class=\"glyphicon glyphicon-log-in\"></span> Sign Out</a></li>";
+		return acc + logOut;
+	}
+	
 	public static String reformatDate(String dbDate) {
 		try {
 			java.util.Date d = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").parse(dbDate);
@@ -144,6 +165,7 @@ public class Util {
 			request.getSession().setAttribute("insID", null);
 			request.getSession().setAttribute("adminID", null);
 			request.getSession().setAttribute("studID", null);
+			request.getSession().setAttribute("advisorID", null);
 		}
 		
 		// Display correct buttons

@@ -12,12 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Classroom;
-import model.Course;
-import model.DBUtil;
-import model.Enroll;
-import model.Usr;
-import model.Util;
+import model.*;
 
 /**
  * Servlet implementation class EnrollStudent
@@ -54,7 +49,7 @@ public class EnrollStudent extends HttpServlet {
 		
 		Course thisCourse = (Course) DBUtil.get("SELECT c FROM Course c WHERE c.id = " + courseID).get(0);
 		
-		
+		Student stud = (Student) DBUtil.get("SELECT s FROM Student s WHERE s.id = " + studID).get(0);
 		if(DBUtil.get("SELECT e FROM Enroll e WHERE e.studid = " + studID ).isEmpty())
 		{
 			Enroll u= new Enroll(sID, Integer.parseInt(courseID), "U");

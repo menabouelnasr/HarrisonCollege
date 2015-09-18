@@ -10,11 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Course;
-import model.Enroll;
-import model.Student;
-
-import model.DBUtil;
+import model.*;
 
 /**
  * Servlet implementation class AddDropCourse
@@ -22,18 +18,10 @@ import model.DBUtil;
 @WebServlet("/AddDropCourse")
 public class AddDropCourse extends HttpServlet {
 	private static final long serialVersionUID = 1L;     
-	private String adddrop;
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public AddDropCourse() {
-        super();
-        adddrop="";
-        // TODO Auto-generated constructor stub
-    }
-	/**
-	 */
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Util.processUser(request);
+		
 		String adddrop="";
 		EntityManager em= DBUtil.getEmFactory().createEntityManager();	
 		try{
@@ -48,8 +36,8 @@ public class AddDropCourse extends HttpServlet {
 				adddrop += "</tr>";	
 			}
 			
-				adddrop += "</tbody></table>";
-				adddrop += "</div>";
+			adddrop += "</tbody></table>";
+			adddrop += "</div>";
 			
 			request.setAttribute("adddrop",adddrop);
 			getServletContext().getRequestDispatcher("/CurrentCourse.jsp").forward(request, response);
@@ -67,7 +55,7 @@ public class AddDropCourse extends HttpServlet {
 	{
 		
 	}	
-	
+	/*
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	String currentc="";
 	EntityManager em= DBUtil.getEmFactory().createEntityManager();		
@@ -100,5 +88,6 @@ public class AddDropCourse extends HttpServlet {
 	}finally{
 		em.close();}
 	}	
+	*/
 	}
 		

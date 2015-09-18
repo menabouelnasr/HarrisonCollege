@@ -40,6 +40,8 @@ public class Advisor extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Util.processUser(request);
+
 		String message="";
 		EntityManager em= DBUtil.getEmFactory().createEntityManager();
 		try{

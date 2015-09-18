@@ -13,12 +13,13 @@ public class Admin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doProcess(request, response);
 		Util.processUser(request);	
+		doProcess(request, response);
 		getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Util.processUser(request);	
 		doProcess(request, response);
 		setUserType(request);
 		getServletContext().getRequestDispatcher("/admin.jsp").forward(request, response);
@@ -147,18 +148,36 @@ public class Admin extends HttpServlet {
 
 		for (Object o : DBUtil.get("SELECT u FROM Usr u WHERE u.id = " + userID)) {
 			Usr u = (Usr)o;
+			String name = u.getUsername();
+			
+			if (u.getType().equalsIgnoreCase("Student")) {
+				Student s = (Student) DBUtil.get("SELECT s FROM Student s WHERE s.id = " + u.getTypeid()).get(0);
+				DBUtil.delete(s);
+			} else if (u.getType().equalsIgnoreCase("Advisor") || u.getType().equalsIgnoreCase("Instructor")) {
+				Instructor i = (Instructor) DBUtil.get("SELECT i FROM Instructor i WHERE i.id = " + u.getTypeid()).get(0);
+				DBUtil.delete(i);
+			}
+			
 			u.setType(userType.toLowerCase());
 			
 			if (userType.equals("Student")) {
 				model.Student s = new model.Student();
+				s.setName(name);
+				s.setEntryyear("2015");
+				s.setGradyear("2019");
+				s.setMajor("Undeclared");
 				DBUtil.insert(s);
-				u.setTypeid((int)s.getId());;
+				u.setTypeid((int)s.getId());
 			} else if (userType.equals("Instructor")) {
 				model.Instructor i = new model.Instructor();
+				i.setName(name);
 				DBUtil.insert(i);
 				u.setTypeid((int)i.getId());
 			} else if (userType.equals("Advisor")) {
-				// do nothing
+				model.Instructor i = new model.Instructor();
+				i.setName(name);
+				DBUtil.insert(i);
+				u.setTypeid((int)i.getId());
 			} else if (userType.equals("Admin")) {
 				// do nothing
 			}

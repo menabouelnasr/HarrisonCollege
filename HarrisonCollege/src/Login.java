@@ -70,7 +70,7 @@ public class Login extends HttpServlet {
 				request.setAttribute("feedback", Util.successAlert("Log In Successful!")); 
 				System.out.println("USERID: " + request.getSession().getAttribute("userID"));
 				
-				String sString = "SELECT u.type FROM Usr u where u.id= '"+ request.getSession().getAttribute("userID") + "'";
+				String sString = "SELECT u.type FROM Usr u where u.typeid= '"+ request.getSession().getAttribute("userID") + "'";
 		    	TypedQuery<String> s = em.createQuery(sString, String.class);
 		    	studType= s.getSingleResult();
 		    	//System.out.println(studType);
@@ -86,6 +86,10 @@ public class Login extends HttpServlet {
 		    	if(studType.equalsIgnoreCase("Admin"))
 		    	{
 		    		request.getSession().setAttribute("adminID", id);
+		    	}
+		    	if(studType.equalsIgnoreCase("Advisor"))
+		    	{
+		    		request.getSession().setAttribute("advisorID", id);
 		    	}
 			}
 		}
@@ -103,7 +107,8 @@ public class Login extends HttpServlet {
 		{
 			Usr u= new Usr(email, username.toLowerCase(), password, "student", 1,"0");
 			DBUtil.insert(u);
-			createStudent(username,major, entryYear, gradYear, request);
+			
+			createStudent(username, gradYear, entryYear, major, request);
 		}
 		return true;
 	}
@@ -113,7 +118,7 @@ public class Login extends HttpServlet {
 		
 		DBUtil.insert(new Student(username, major,entryYear,gradYear));
 		
-		String qString = "Select max(s.id) from Student s";
+		String qString = "Select max(u.typeid) from Usr u";
     	TypedQuery<Long> q = em.createQuery(qString, Long.class);
     	ID= q.getSingleResult();
     	System.out.println("Student ID: "+ID);
@@ -135,7 +140,7 @@ public class Login extends HttpServlet {
 		for (Object o : DBUtil.get("SELECT u FROM Usr u WHERE u.username = '" + username.toLowerCase() + "'")) {
 			Usr u = (Usr)o;
 			if (u.getPassword().equals(password)) {
-				return u.getId();
+				return u.getTypeid();
 			}
 		}
 		return -1;

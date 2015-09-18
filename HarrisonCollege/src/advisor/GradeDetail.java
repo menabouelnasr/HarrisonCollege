@@ -21,19 +21,11 @@ import model.*;
 @WebServlet("/GradeDetail")
 public class GradeDetail extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	  private String grades;       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GradeDetail() {
-        super();
-        grades = "";
-        // TODO Auto-generated constructor stub
-    }    
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+	private String grades;       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Util.processUser(request);
+
 		int id = Integer.parseInt(request.getParameter("Id"));
 		grades= "<table>";
 		List <Enroll> gradeList = StudentDB.selectenrollbyid(id);
@@ -75,7 +67,6 @@ public class GradeDetail extends HttpServlet {
 		grades += "<th>";
 		grades += "Grade";
 		grades += "</th>";
-		grades += "<th>";
 		grades += "</thead>";
 		grades += "<tbody>";
 		for(Course c : cs){

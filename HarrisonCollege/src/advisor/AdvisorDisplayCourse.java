@@ -25,6 +25,8 @@ public class AdvisorDisplayCourse extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		Util.processUser(request);
+
 		String currentc = "";
 		System.out.println("ID: "+request.getParameter("Idd"));
 		int sid = Integer.parseInt(request.getParameter("Idd"));
